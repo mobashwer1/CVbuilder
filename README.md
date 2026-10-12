@@ -1,2 +1,0 @@
-# CVbuilder
-cv builder
