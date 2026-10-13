@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Resume Builder - Strict Single Page</title>
+    <title>Professional Resume Builder - Perfect Alignment</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- html2pdf Library -->
@@ -12,7 +12,7 @@
         .a4-page {
             width: 210mm;
             height: 297mm;
-            padding: 0mm 0mm;
+            padding: 10mm 12mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
@@ -25,50 +25,21 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
-        function updateResume() {
-    const val = (id) => document.getElementById(id) ? document.getElementById(id).value : '';
-    const templateStyle = val('input-template');
-    const previewContainer = document.getElementById('resume-preview');
-
-    // Apply template specific wrapper classes
-    if (templateStyle === 'modern') {
-        previewContainer.className = "a4-page text-slate-900 text-[8pt] leading-tight border-t-4 border-indigo-600";
-    } else if (templateStyle === 'minimal') {
-        previewContainer.className = "a4-page text-zinc-800 text-[8pt] leading-tight font-serif";
-    } else {
-        previewContainer.className = "a4-page text-slate-900 text-[8pt] leading-tight";
-    }
-
-    // Existing update text logic...
-    if(document.getElementById('preview-name')) document.getElementById('preview-name').innerText = val('input-name');
-    if(document.getElementById('preview-title')) document.getElementById('preview-title').innerText = val('input-title');
-    // ... rest of your fields
-}
-    </style>    
+    </style>
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col">
 
     <!-- Header -->
     <header class="bg-slate-900 text-white shadow-md py-4 px-6 flex justify-between items-center">
         <h1 class="text-xl font-bold tracking-wide">Professional Resume Builder</h1>
-<div class="mb-4">
-    <label class="block text-xs font-medium text-slate-600 mb-1">Select Template Style</label>
-    <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded">
-        <option value="classic">Classic Professional</option>
-        <option value="modern">Modern Split</option>
-        <option value="minimal">Minimalist Clean</option>
-    </select>
-</div>
-        
         <button onclick="downloadPDF()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 transition">
             Download A4 PDF
-        </button>    
+        </button>
     </header>
 
     <!-- Main Container -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
-       
+        
         <!-- LEFT: Wizard Form -->
         <div class="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between max-h-[85vh] overflow-hidden">
             
@@ -88,7 +59,18 @@
                 
                 <!-- STEP 1: Header -->
                 <div id="step-1" class="wizard-step space-y-4">
-                    <h3 class="text-sm font-bold text-slate-900 uppercase">1. Personal Information</h3>
+                    <h3 class="text-sm font-bold text-slate-900 uppercase">1. Personal Information & Template</h3>
+                    
+                    <!-- Template Selector -->
+                    <div>
+                        <label class="block text-xs font-medium text-slate-600 mb-1">Resume Template Style</label>
+                        <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
+                            <option value="classic">Classic Professional (Clean & Structured)</option>
+                            <option value="modern">Modern Split (Indigo Accent Border)</option>
+                            <option value="minimal">Minimalist Clean (Serif Typography)</option>
+                        </select>
+                    </div>
+
                     <div>
                         <label class="block text-xs font-medium text-slate-600 mb-1">Profile Photo (Square)</label>
                         <input type="file" id="input-image" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700">
@@ -216,59 +198,57 @@
         <div class="bg-slate-200 flex justify-center items-start overflow-y-auto max-h-[85vh] p-4">
             <div id="resume-preview" class="a4-page text-slate-900 text-[8pt] leading-tight">
                 <div>
-                    <!-- Header with Square Image -->
-                    <div class="flex items-center gap-2 border-b border-slate-300 pb-1.5 mb-1.5">
-                        <div id="preview-img-container" class="hidden flex-shrink-0">
-                            <img id="preview-image" src="" alt="Photo" class="w-11 h-11 rounded-none object-cover border border-slate-300">
+                    <!-- Header with Square Image & Centered Stack Layout -->
+                    <div id="preview-header-wrap" class="w-full text-center border-b border-slate-300 pb-1.5 mb-1.5">
+                        <div id="preview-img-container" class="hidden mx-auto mb-1 w-11 h-11">
+                            <img id="preview-image" src="" alt="Photo" class="w-11 h-11 rounded-none object-cover border border-slate-300 mx-auto">
                         </div>
-                        <div class="flex-1 text-center">
-                            <h1 id="preview-name" class="text-sm font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
-                            <p id="preview-title" class="text-[8.5pt] font-semibold text-indigo-700">Senior Full Stack Software Engineer</p>
-                            <p id="preview-contact" class="text-[7.5pt] text-slate-600 mt-0.5">
-                                alex.morgan@email.com &bull; +1 (555) 382-9102 &bull; San Francisco, CA &bull; linkedin.com/in/alexmorgan
-                            </p>
-                        </div>
+                        <h1 id="preview-name" class="text-sm font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
+                        <p id="preview-title" class="text-[8.5pt] font-semibold text-indigo-700">Senior Full Stack Software Engineer</p>
+                        <p id="preview-contact" class="text-[7.5pt] text-slate-600 mt-0.5 w-full block">
+                            alex.morgan@email.com &bull; +1 (555) 382-9102 &bull; San Francisco, CA &bull; linkedin.com/in/alexmorgan
+                        </p>
                     </div>
 
                     <!-- Summary -->
                     <div class="mb-1">
-                        <h3 class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Summary</h3>
+                        <h3 id="heading-summary" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Summary</h3>
                         <p id="preview-summary" class="text-[8pt] text-slate-700">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</p>
                     </div>
 
                     <!-- Experience -->
                     <div class="mb-1">
-                        <h3 class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Experience</h3>
+                        <h3 id="heading-experience" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Experience</h3>
                         <div id="preview-experience" class="space-y-0.5 text-[8pt]"></div>
                     </div>
 
                     <!-- Projects -->
                     <div class="mb-1">
-                        <h3 class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Key Projects</h3>
+                        <h3 id="heading-projects" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Key Projects</h3>
                         <div id="preview-projects" class="space-y-0.5 text-[8pt]"></div>
                     </div>
 
                     <!-- Education -->
                     <div class="mb-1">
-                        <h3 class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Education</h3>
+                        <h3 id="heading-education" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Education</h3>
                         <div id="preview-education" class="space-y-0.5 text-[8pt]"></div>
                     </div>
 
                     <!-- Certifications -->
                     <div class="mb-1">
-                        <h3 class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Certifications</h3>
+                        <h3 id="heading-certs" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Certifications</h3>
                         <p id="preview-certs" class="text-[8pt] text-slate-700">AWS Certified Solutions Architect, Certified Kubernetes Administrator</p>
                     </div>
 
                     <!-- Skills -->
                     <div class="mb-1">
-                        <h3 class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Technical Skills</h3>
+                        <h3 id="heading-skills" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Technical Skills</h3>
                         <p id="preview-skills" class="text-[8pt] text-slate-700">JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS</p>
                     </div>
 
                     <!-- References -->
                     <div id="preview-references-section" class="mb-0.5 hidden">
-                        <h3 class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional References</h3>
+                        <h3 id="heading-refs" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional References</h3>
                         <div id="preview-references" class="grid grid-cols-2 gap-1 text-[7.5pt]"></div>
                     </div>
                 </div>
@@ -404,13 +384,34 @@
 
         function updateResume() {
             const val = (id) => document.getElementById(id) ? document.getElementById(id).value : '';
-
+            const template = val('input-template');
+            
             if(document.getElementById('preview-name')) document.getElementById('preview-name').innerText = val('input-name');
             if(document.getElementById('preview-title')) document.getElementById('preview-title').innerText = val('input-title');
             if(document.getElementById('preview-contact')) document.getElementById('preview-contact').innerText = `${val('input-email')} • ${val('input-phone')} • ${val('input-location')} • ${val('input-links')}`;
             if(document.getElementById('preview-summary')) document.getElementById('preview-summary').innerText = val('input-summary');
             if(document.getElementById('preview-certs')) document.getElementById('preview-certs').innerText = val('input-certs');
             if(document.getElementById('preview-skills')) document.getElementById('preview-skills').innerText = val('input-skills');
+
+            // Apply Dynamic Template Styles
+            const headerWrap = document.getElementById('preview-header-wrap');
+            const previewRoot = document.getElementById('resume-preview');
+            const hHeadings = document.querySelectorAll('#resume-preview h3');
+
+            if (template === 'modern') {
+                previewRoot.style.fontFamily = 'Arial, sans-serif';
+                headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-1.5 mb-1.5 bg-indigo-50/50 p-1.5 rounded";
+                hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-0.5");
+            } else if (template === 'minimal') {
+                previewRoot.style.fontFamily = 'Georgia, serif';
+                headerWrap.className = "w-full text-center border-b border-zinc-400 pb-1.5 mb-1.5";
+                hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-0.5");
+            } else {
+                // Classic
+                previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
+                headerWrap.className = "w-full text-center border-b border-slate-300 pb-1.5 mb-1.5";
+                hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5");
+            }
 
             // Experience Loop
             const expContainer = document.getElementById('preview-experience');
@@ -510,31 +511,11 @@
                 margin:       0,
                 filename:     'Professional_Resume.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true, windowWidth: 794 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
             html2pdf().from(element).set(options).save();
         }
-function updateResume() {
-    const val = (id) => document.getElementById(id) ? document.getElementById(id).value : '';
-    const templateStyle = val('input-template');
-    const previewContainer = document.getElementById('resume-preview');
-
-    // Apply template specific wrapper classes
-    if (templateStyle === 'modern') {
-        previewContainer.className = "a4-page text-slate-900 text-[8pt] leading-tight border-t-4 border-indigo-600";
-    } else if (templateStyle === 'minimal') {
-        previewContainer.className = "a4-page text-zinc-800 text-[8pt] leading-tight font-serif";
-    } else {
-        previewContainer.className = "a4-page text-slate-900 text-[8pt] leading-tight";
-    }
-
-    // Existing update text logic...
-    if(document.getElementById('preview-name')) document.getElementById('preview-name').innerText = val('input-name');
-    if(document.getElementById('preview-title')) document.getElementById('preview-title').innerText = val('input-title');
-    // ... rest of your fields
-}
-        
     </script>
 </body>
 </html>
