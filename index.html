@@ -3,11 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Resume Builder - Perfect Alignment</title>
+    <title>Free ATS Resume Builder - Create Single-Page A4 Resumes</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Build an ATS-optimized single-page A4 resume online for free. Download crisp PDF resumes instantly with modern template options. No login required.">
+    <meta name="keywords" content="free ATS resume builder, A4 resume generator, one page CV maker, ATS compliant resume templates, free PDF resume, single page resume creator">
+    <meta name="robots" content="index, follow">
+
+    <!-- OpenGraph / Social Previews -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free ATS Resume Builder - Create Single-Page A4 Resumes">
+    <meta property="og:description" content="Build an ATS-optimized single-page A4 resume online for free. Clean layouts, instant live preview, zero sign-up required.">
+    <meta property="og:url" content="https://btube.bd">
+
+    <!-- Structured Data (Google Schema) for Fast Ranking -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Free ATS Resume Builder",
+      "url": "https://btube.bd",
+      "operatingSystem": "All",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- html2pdf Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
     <style>
         .a4-page {
             width: 210mm;
@@ -26,189 +56,184 @@
             justify-content: space-between;
         }
     </style>
-    <!-- SEO Meta Tags -->
-<meta name="description" content="Build an ATS-optimized single-page A4 resume online for free. Download clean, professional PDF resumes instantly. No registration or credit card required.">
-<meta name="keywords" content="free ATS resume builder, A4 resume generator, one page CV maker, ATS compliant resume templates, free PDF resume">
-<meta name="robots" content="index, follow">
-
-<!-- OpenGraph / Social Media Previews (LinkedIn, Facebook, Twitter) -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Free ATS Resume Builder - Create Single-Page A4 Resumes">
-<meta property="og:description" content="Build an ATS-optimized single-page A4 resume online for free. Clean layouts, instant live preview, zero sign-up required.">
-<meta property="og:url" content="https://btube.bd"> <!-- Replace with your live site URL -->
 </head>
-<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col">
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
     <!-- Header -->
     <header class="bg-slate-900 text-white shadow-md py-4 px-6 flex justify-between items-center">
-        <h1 class="text-xl font-bold tracking-wide">Professional Resume Builder</h1>
-        <button onclick="downloadPDF()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 transition">
-            Download A4 PDF
+        <h1 class="text-xl font-bold tracking-wide">Free ATS Resume Builder</h1>
+        <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 transition">
+            Download A4 PDF (100% Free)
         </button>
     </header>
 
     <!-- Main Container -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         
-        <!-- LEFT: Wizard Form -->
-        <div class="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between max-h-[85vh] overflow-hidden">
-            
-            <!-- Step Navigation Tabs -->
-            <div id="tabs-container" class="flex border-b border-slate-200 pb-3 mb-4 justify-between text-xs font-semibold overflow-x-auto gap-2">
-                <button type="button" onclick="setStep(1)" id="tab-1" class="step-tab text-indigo-600 border-b-2 border-indigo-600 pb-1 px-1 whitespace-nowrap cursor-pointer">1. Header</button>
-                <button type="button" onclick="setStep(2)" id="tab-2" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">2. Summary</button>
-                <button type="button" onclick="setStep(3)" id="tab-3" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">3. Experience</button>
-                <button type="button" onclick="setStep(4)" id="tab-4" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">4. Projects</button>
-                <button type="button" onclick="setStep(5)" id="tab-5" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">5. Education</button>
-                <button type="button" onclick="setStep(6)" id="tab-6" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">6. Skills & Certs</button>
-                <button type="button" onclick="setStep(7)" id="tab-7" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">7. References</button>
-            </div>
-
-            <!-- Step Content Container -->
-            <div class="flex-1 overflow-y-auto pr-2 space-y-4">
+        <!-- LEFT: Wizard Form & Sidebar Ad Space -->
+        <div class="space-y-4">
+            <div class="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between max-h-[75vh] overflow-hidden">
                 
-                <!-- STEP 1: Header -->
-                <div id="step-1" class="wizard-step space-y-4">
-                    <h3 class="text-sm font-bold text-slate-900 uppercase">1. Personal Information & Template</h3>
+                <!-- Step Navigation Tabs -->
+                <div id="tabs-container" class="flex border-b border-slate-200 pb-3 mb-4 justify-between text-xs font-semibold overflow-x-auto gap-2">
+                    <button type="button" onclick="setStep(1)" id="tab-1" class="step-tab text-indigo-600 border-b-2 border-indigo-600 pb-1 px-1 whitespace-nowrap cursor-pointer">1. Header</button>
+                    <button type="button" onclick="setStep(2)" id="tab-2" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">2. Summary</button>
+                    <button type="button" onclick="setStep(3)" id="tab-3" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">3. Experience</button>
+                    <button type="button" onclick="setStep(4)" id="tab-4" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">4. Projects</button>
+                    <button type="button" onclick="setStep(5)" id="tab-5" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">5. Education</button>
+                    <button type="button" onclick="setStep(6)" id="tab-6" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">6. Skills & Certs</button>
+                    <button type="button" onclick="setStep(7)" id="tab-7" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">7. References</button>
+                </div>
+
+                <!-- Step Content Container -->
+                <div class="flex-1 overflow-y-auto pr-2 space-y-4">
                     
-                    <!-- Template Selector -->
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 mb-1">Resume Template Style</label>
-                        <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
-                            <option value="classic">Classic Professional (Clean & Structured)</option>
-                            <option value="modern">Modern Split (Indigo Accent Border)</option>
-                            <option value="minimal">Minimalist Clean (Serif Typography)</option>
-                        </select>
-                    </div>
+                    <!-- STEP 1: Header -->
+                    <div id="step-1" class="wizard-step space-y-4">
+                        <h3 class="text-sm font-bold text-slate-900 uppercase">1. Personal Information & Template</h3>
+                        
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Resume Template Style</label>
+                            <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
+                                <option value="classic">Classic Professional (Clean & Structured)</option>
+                                <option value="modern">Modern Split (Indigo Accent Border)</option>
+                                <option value="minimal">Minimalist Clean (Serif Typography)</option>
+                            </select>
+                        </div>
 
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 mb-1">Profile Photo (Square)</label>
-                        <input type="file" id="input-image" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700">
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-medium text-slate-600">Full Name</label>
-                            <input type="text" id="input-name" value="Alex Morgan" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Profile Photo (Square)</label>
+                            <input type="file" id="input-image" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700">
                         </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600">Job Title</label>
-                            <input type="text" id="input-title" value="Senior Full Stack Software Engineer" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600">Email</label>
-                            <input type="text" id="input-email" value="alex.morgan@email.com" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600">Phone</label>
-                            <input type="text" id="input-phone" value="+1 (555) 382-9102" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600">Location</label>
-                            <input type="text" id="input-location" value="San Francisco, CA" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600">LinkedIn / GitHub</label>
-                            <input type="text" id="input-links" value="linkedin.com/in/alexmorgan" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STEP 2: Summary -->
-                <div id="step-2" class="wizard-step space-y-4 hidden">
-                    <h3 class="text-sm font-bold text-slate-900 uppercase">2. Professional Summary</h3>
-                    <textarea id="input-summary" rows="4" oninput="updateResume()" class="w-full p-2 text-sm border rounded">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</textarea>
-                </div>
-
-                <!-- STEP 3: Experience -->
-                <div id="step-3" class="wizard-step space-y-4 hidden">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-slate-900 uppercase">3. Work Experience</h3>
-                        <button type="button" onclick="addExperience()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Job</button>
-                    </div>
-                    <div id="experience-container" class="space-y-4">
-                        <div class="p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative">
-                            <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="text" placeholder="Company" value="Apex Cloud Technologies" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
-                                <input type="text" placeholder="Role" value="Senior Engineer" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">Full Name</label>
+                                <input type="text" id="input-name" value="Alex Morgan" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
                             </div>
-                            <input type="text" placeholder="Dates" value="Jan 2022 - Present" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded exp-dates">
-                            <textarea placeholder="Accomplishments..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded exp-desc">Architected microservices using Node.js and AWS, reducing latency by 35%.</textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STEP 4: Projects -->
-                <div id="step-4" class="wizard-step space-y-4 hidden">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-slate-900 uppercase">4. Key Projects</h3>
-                        <button type="button" onclick="addProject()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Project</button>
-                    </div>
-                    <div id="project-container" class="space-y-4">
-                        <div class="p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative">
-                            <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                            <input type="text" placeholder="Project Name" value="CloudScale Dashboard" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
-                            <input type="text" placeholder="Technologies" value="React, Node.js, Docker" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
-                            <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc">Built a real-time monitoring tool utilized by over 5,000 developers.</textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STEP 5: Education -->
-                <div id="step-5" class="wizard-step space-y-4 hidden">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-slate-900 uppercase">5. Education</h3>
-                        <button type="button" onclick="addEducation()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Degree</button>
-                    </div>
-                    <div id="education-container" class="space-y-4">
-                        <div class="p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative">
-                            <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="text" placeholder="Degree" value="B.S. in Computer Science" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
-                                <input type="text" placeholder="Institution" value="UC Berkeley" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">Job Title</label>
+                                <input type="text" id="input-title" value="Senior Full Stack Software Engineer" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
                             </div>
-                            <input type="text" placeholder="Year" value="2019" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded edu-year">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">Email</label>
+                                <input type="text" id="input-email" value="alex.morgan@email.com" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">Phone</label>
+                                <input type="text" id="input-phone" value="+1 (555) 382-9102" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">Location</label>
+                                <input type="text" id="input-location" value="San Francisco, CA" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">LinkedIn / GitHub</label>
+                                <input type="text" id="input-links" value="linkedin.com/in/alexmorgan" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                            </div>
                         </div>
                     </div>
+
+                    <!-- STEP 2: Summary -->
+                    <div id="step-2" class="wizard-step space-y-4 hidden">
+                        <h3 class="text-sm font-bold text-slate-900 uppercase">2. Professional Summary</h3>
+                        <textarea id="input-summary" rows="4" oninput="updateResume()" class="w-full p-2 text-sm border rounded">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</textarea>
+                    </div>
+
+                    <!-- STEP 3: Experience -->
+                    <div id="step-3" class="wizard-step space-y-4 hidden">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase">3. Work Experience</h3>
+                            <button type="button" onclick="addExperience()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Job</button>
+                        </div>
+                        <div id="experience-container" class="space-y-4">
+                            <div class="p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative">
+                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" placeholder="Company" value="Apex Cloud Technologies" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
+                                    <input type="text" placeholder="Role" value="Senior Engineer" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
+                                </div>
+                                <input type="text" placeholder="Dates" value="Jan 2022 - Present" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded exp-dates">
+                                <textarea placeholder="Accomplishments..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded exp-desc">Architected microservices using Node.js and AWS, reducing latency by 35%.</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Projects -->
+                    <div id="step-4" class="wizard-step space-y-4 hidden">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase">4. Key Projects</h3>
+                            <button type="button" onclick="addProject()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Project</button>
+                        </div>
+                        <div id="project-container" class="space-y-4">
+                            <div class="p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative">
+                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                                <input type="text" placeholder="Project Name" value="CloudScale Dashboard" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
+                                <input type="text" placeholder="Technologies" value="React, Node.js, Docker" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
+                                <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc">Built a real-time monitoring tool utilized by over 5,000 developers.</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: Education -->
+                    <div id="step-5" class="wizard-step space-y-4 hidden">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase">5. Education</h3>
+                            <button type="button" onclick="addEducation()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Degree</button>
+                        </div>
+                        <div id="education-container" class="space-y-4">
+                            <div class="p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative">
+                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" placeholder="Degree" value="B.S. in Computer Science" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
+                                    <input type="text" placeholder="Institution" value="UC Berkeley" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
+                                </div>
+                                <input type="text" placeholder="Year" value="2019" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded edu-year">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 6: Skills & Certifications -->
+                    <div id="step-6" class="wizard-step space-y-4 hidden">
+                        <h3 class="text-sm font-bold text-slate-900 uppercase">6. Skills & Certifications</h3>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Certifications</label>
+                            <input type="text" id="input-certs" value="AWS Certified Solutions Architect, Certified Kubernetes Administrator" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600 mb-1">Technical Skills</label>
+                            <input type="text" id="input-skills" value="JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
+                        </div>
+                    </div>
+
+                    <!-- STEP 7: References -->
+                    <div id="step-7" class="wizard-step space-y-4 hidden">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase">7. Professional References</h3>
+                            <button type="button" onclick="addReference()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Reference</button>
+                        </div>
+                        <div id="reference-container" class="space-y-4"></div>
+                    </div>
+
                 </div>
 
-                <!-- STEP 6: Skills & Certifications -->
-                <div id="step-6" class="wizard-step space-y-4 hidden">
-                    <h3 class="text-sm font-bold text-slate-900 uppercase">6. Skills & Certifications</h3>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 mb-1">Certifications</label>
-                        <input type="text" id="input-certs" value="AWS Certified Solutions Architect, Certified Kubernetes Administrator" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-slate-600 mb-1">Technical Skills</label>
-                        <input type="text" id="input-skills" value="JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
-                    </div>
-                </div>
-
-                <!-- STEP 7: References -->
-                <div id="step-7" class="wizard-step space-y-4 hidden">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-slate-900 uppercase">7. Professional References</h3>
-                        <button type="button" onclick="addReference()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Reference</button>
-                    </div>
-                    <div id="reference-container" class="space-y-4"></div>
+                <!-- Step Footer Buttons -->
+                <div class="flex justify-between pt-4 border-t border-slate-200 mt-4">
+                    <button type="button" id="prev-btn" onclick="changeStep(-1)" class="bg-slate-200 text-slate-700 px-4 py-2 rounded text-xs font-semibold opacity-50 cursor-not-allowed" disabled>Previous</button>
+                    <button type="button" id="next-btn" onclick="changeStep(1)" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-semibold">Next Step</button>
                 </div>
 
             </div>
 
-            <!-- Step Footer Buttons -->
-            <div class="flex justify-between pt-4 border-t border-slate-200 mt-4">
-                <button type="button" id="prev-btn" onclick="changeStep(-1)" class="bg-slate-200 text-slate-700 px-4 py-2 rounded text-xs font-semibold opacity-50 cursor-not-allowed" disabled>Previous</button>
-                <button type="button" id="next-btn" onclick="changeStep(1)" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-semibold">Next Step</button>
+            <!-- AD BANNER SLOT 1 -->
+            <div class="bg-slate-200 border-2 border-dashed border-slate-300 rounded-xl p-4 text-center text-slate-500 text-xs">
+                <span>Advertisement Space (Paste Ad Code Here)</span>
             </div>
-
         </div>
 
         <!-- RIGHT: Live Exact A4 Preview -->
-        <div class="bg-slate-200 flex justify-center items-start overflow-y-auto max-h-[85vh] p-4">
+        <div class="bg-slate-200 flex flex-col items-center justify-start overflow-y-auto max-h-[85vh] p-4 gap-4">
             <div id="resume-preview" class="a4-page text-slate-900 text-[8pt] leading-tight">
                 <div>
-                    <!-- Header with Square Image & Centered Stack Layout -->
                     <div id="preview-header-wrap" class="w-full text-center border-b border-slate-300 pb-1.5 mb-1.5">
                         <div id="preview-img-container" class="hidden mx-auto mb-1 w-11 h-11">
                             <img id="preview-image" src="" alt="Photo" class="w-11 h-11 rounded-none object-cover border border-slate-300 mx-auto">
@@ -267,6 +292,23 @@
 
     </main>
 
+    <!-- AD BANNER SLOT 2 & INTERNAL SEO LINK FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 px-6 text-center text-slate-500 text-xs">
+        <div class="max-w-2xl mx-auto border-2 border-dashed border-slate-300 rounded-lg p-3 mb-4">
+            <span>Advertisement Space (Footer Banner Ad)</span>
+        </div>
+        
+        <!-- SEO Keyword Links -->
+        <div class="max-w-4xl mx-auto mb-3 flex flex-wrap justify-center gap-4 text-indigo-600 font-medium">
+            <a href="index.html" class="hover:underline">Free ATS Resume Builder</a>
+            <a href="software-engineer.html" class="hover:underline">Software Engineer Resume Generator</a>
+            <a href="hr-assistant.html" class="hover:underline">HR Assistant Resume Builder</a>
+            <a href="privacy.html" class="hover:underline text-slate-500">Privacy Policy</a>
+        </div>
+
+        <p class="text-slate-400">&copy; 2026 Free ATS Resume Builder. Single-page A4 PDF resumes with zero login required.</p>
+    </footer>
+
     <script>
         let currentStep = 1;
         const totalSteps = 7;
@@ -274,13 +316,13 @@
         function setStep(step) {
             currentStep = step;
             for (let i = 1; i <= totalSteps; i++) {
-                const stepEl = document.getElementById(`step-${i}`);
-                const tabEl = document.getElementById(`tab-${i}`);
+                const stepEl = document.getElementById('step-' + i);
+                const tabEl = document.getElementById('tab-' + i);
                 if (stepEl) stepEl.classList.add('hidden');
                 if (tabEl) tabEl.className = "step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer";
             }
-            const activeStep = document.getElementById(`step-${currentStep}`);
-            const activeTab = document.getElementById(`tab-${currentStep}`);
+            const activeStep = document.getElementById('step-' + currentStep);
+            const activeTab = document.getElementById('tab-' + currentStep);
             if (activeStep) activeStep.classList.remove('hidden');
             if (activeTab) activeTab.className = "step-tab text-indigo-600 border-b-2 border-indigo-600 pb-1 px-1 whitespace-nowrap cursor-pointer";
 
@@ -289,6 +331,11 @@
             if (prevBtn) {
                 prevBtn.disabled = currentStep === 1;
                 prevBtn.style.opacity = currentStep === 1 ? "0.5" : "1";
+                if (currentStep === 1) {
+                    prevBtn.classList.add('cursor-not-allowed');
+                } else {
+                    prevBtn.classList.remove('cursor-not-allowed');
+                }
             }
             if (nextBtn) {
                 nextBtn.innerText = currentStep === totalSteps ? "Finish" : "Next Step";
@@ -315,7 +362,7 @@
                     const container = document.getElementById('preview-img-container');
                     if (img) img.src = e.target.result;
                     if (container) container.classList.remove('hidden');
-                }
+                };
                 reader.readAsDataURL(file);
             }
         }
@@ -393,12 +440,15 @@
         }
 
         function updateResume() {
-            const val = (id) => document.getElementById(id) ? document.getElementById(id).value : '';
+            const val = function(id) {
+                const el = document.getElementById(id);
+                return el ? el.value : '';
+            };
             const template = val('input-template');
             
             if(document.getElementById('preview-name')) document.getElementById('preview-name').innerText = val('input-name');
             if(document.getElementById('preview-title')) document.getElementById('preview-title').innerText = val('input-title');
-            if(document.getElementById('preview-contact')) document.getElementById('preview-contact').innerText = `${val('input-email')} • ${val('input-phone')} • ${val('input-location')} • ${val('input-links')}`;
+            if(document.getElementById('preview-contact')) document.getElementById('preview-contact').innerText = val('input-email') + ' • ' + val('input-phone') + ' • ' + val('input-location') + ' • ' + val('input-links');
             if(document.getElementById('preview-summary')) document.getElementById('preview-summary').innerText = val('input-summary');
             if(document.getElementById('preview-certs')) document.getElementById('preview-certs').innerText = val('input-certs');
             if(document.getElementById('preview-skills')) document.getElementById('preview-skills').innerText = val('input-skills');
@@ -411,37 +461,41 @@
             if (template === 'modern') {
                 previewRoot.style.fontFamily = 'Arial, sans-serif';
                 headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-1.5 mb-1.5 bg-indigo-50/50 p-1.5 rounded";
-                hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-0.5");
+                hHeadings.forEach(function(h) {
+                    h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-0.5";
+                });
             } else if (template === 'minimal') {
                 previewRoot.style.fontFamily = 'Georgia, serif';
                 headerWrap.className = "w-full text-center border-b border-zinc-400 pb-1.5 mb-1.5";
-                hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-0.5");
+                hHeadings.forEach(function(h) {
+                    h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-0.5";
+                });
             } else {
                 // Classic
                 previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
                 headerWrap.className = "w-full text-center border-b border-slate-300 pb-1.5 mb-1.5";
-                hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5");
+                hHeadings.forEach(function(h) {
+                    h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5";
+                });
             }
 
             // Experience Loop
             const expContainer = document.getElementById('preview-experience');
             if (expContainer) {
                 expContainer.innerHTML = '';
-                document.querySelectorAll('.exp-item').forEach(item => {
-                    const company = item.querySelector('.exp-company')?.value || '';
-                    const role = item.querySelector('.exp-role')?.value || '';
-                    const dates = item.querySelector('.exp-dates')?.value || '';
-                    const desc = item.querySelector('.exp-desc')?.value || '';
+                document.querySelectorAll('.exp-item').forEach(function(item) {
+                    const company = item.querySelector('.exp-company') ? item.querySelector('.exp-company').value : '';
+                    const role = item.querySelector('.exp-role') ? item.querySelector('.exp-role').value : '';
+                    const dates = item.querySelector('.exp-dates') ? item.querySelector('.exp-dates').value : '';
+                    const desc = item.querySelector('.exp-desc') ? item.querySelector('.exp-desc').value : '';
                     if(company || role || desc) {
-                        expContainer.innerHTML += `
-                            <div>
-                                <div class="flex justify-between font-semibold text-slate-900">
-                                    <span>${role} — ${company}</span>
-                                    <span>${dates}</span>
-                                </div>
-                                <p class="text-slate-700">${desc}</p>
-                            </div>
-                        `;
+                        expContainer.innerHTML += '<div>' +
+                            '<div class="flex justify-between font-semibold text-slate-900">' +
+                                '<span>' + role + ' — ' + company + '</span>' +
+                                '<span>' + dates + '</span>' +
+                            '</div>' +
+                            '<p class="text-slate-700">' + desc + '</p>' +
+                        '</div>';
                     }
                 });
             }
@@ -450,19 +504,17 @@
             const projContainer = document.getElementById('preview-projects');
             if (projContainer) {
                 projContainer.innerHTML = '';
-                document.querySelectorAll('.proj-item').forEach(item => {
-                    const name = item.querySelector('.proj-name')?.value || '';
-                    const tech = item.querySelector('.proj-tech')?.value || '';
-                    const desc = item.querySelector('.proj-desc')?.value || '';
+                document.querySelectorAll('.proj-item').forEach(function(item) {
+                    const name = item.querySelector('.proj-name') ? item.querySelector('.proj-name').value : '';
+                    const tech = item.querySelector('.proj-tech') ? item.querySelector('.proj-tech').value : '';
+                    const desc = item.querySelector('.proj-desc') ? item.querySelector('.proj-desc').value : '';
                     if(name || desc) {
-                        projContainer.innerHTML += `
-                            <div>
-                                <div class="flex justify-between font-semibold text-slate-900">
-                                    <span>${name} <span class="font-normal text-slate-600">(${tech})</span></span>
-                                </div>
-                                <p class="text-slate-700">${desc}</p>
-                            </div>
-                        `;
+                        projContainer.innerHTML += '<div>' +
+                            '<div class="flex justify-between font-semibold text-slate-900">' +
+                                '<span>' + name + ' <span class="font-normal text-slate-600">(' + tech + ')</span></span>' +
+                            '</div>' +
+                            '<p class="text-slate-700">' + desc + '</p>' +
+                        '</div>';
                     }
                 });
             }
@@ -471,17 +523,15 @@
             const eduContainer = document.getElementById('preview-education');
             if (eduContainer) {
                 eduContainer.innerHTML = '';
-                document.querySelectorAll('.edu-item').forEach(item => {
-                    const degree = item.querySelector('.edu-degree')?.value || '';
-                    const uni = item.querySelector('.edu-uni')?.value || '';
-                    const year = item.querySelector('.edu-year')?.value || '';
+                document.querySelectorAll('.edu-item').forEach(function(item) {
+                    const degree = item.querySelector('.edu-degree') ? item.querySelector('.edu-degree').value : '';
+                    const uni = item.querySelector('.edu-uni') ? item.querySelector('.edu-uni').value : '';
+                    const year = item.querySelector('.edu-year') ? item.querySelector('.edu-year').value : '';
                     if(degree || uni) {
-                        eduContainer.innerHTML += `
-                            <div class="flex justify-between">
-                                <span class="font-semibold text-slate-900">${degree} — ${uni}</span>
-                                <span class="text-slate-600">${year}</span>
-                            </div>
-                        `;
+                        eduContainer.innerHTML += '<div class="flex justify-between">' +
+                            '<span class="font-semibold text-slate-900">' + degree + ' — ' + uni + '</span>' +
+                            '<span class="text-slate-600">' + year + '</span>' +
+                        '</div>';
                     }
                 });
             }
@@ -494,17 +544,15 @@
                 refContainer.innerHTML = '';
                 if (refItems.length > 0) {
                     refSection.classList.remove('hidden');
-                    refItems.forEach(item => {
-                        const name = item.querySelector('.ref-name')?.value || '';
-                        const title = item.querySelector('.ref-title')?.value || '';
-                        const contact = item.querySelector('.ref-contact')?.value || '';
+                    refItems.forEach(function(item) {
+                        const name = item.querySelector('.ref-name') ? item.querySelector('.ref-name').value : '';
+                        const title = item.querySelector('.ref-title') ? item.querySelector('.ref-title').value : '';
+                        const contact = item.querySelector('.ref-contact') ? item.querySelector('.ref-contact').value : '';
                         if(name || title) {
-                            refContainer.innerHTML += `
-                                <div>
-                                    <p class="font-semibold text-slate-900">${name} (${title})</p>
-                                    <p class="text-indigo-600">${contact}</p>
-                                </div>
-                            `;
+                            refContainer.innerHTML += '<div>' +
+                                '<p class="font-semibold text-slate-900">' + name + ' (' + title + ')</p>' +
+                                '<p class="text-indigo-600">' + contact + '</p>' +
+                            '</div>';
                         }
                     });
                 } else {
@@ -527,11 +575,5 @@
             html2pdf().from(element).set(options).save();
         }
     </script>
-<footer class="bg-white border-t border-slate-200 py-4 px-6 text-center text-slate-500 text-xs">
-    <div class="max-w-2xl mx-auto border-2 border-dashed border-slate-300 rounded-lg p-3 mb-2">
-        <span>Advertisement Space</span>
-    </div>
-    <p class="text-slate-400">&copy; 2026 Professional Resume Builder &bull; <a href="privacy.html" class="underline hover:text-slate-600">Privacy Policy</a></p>
-</footer>
 </body>
 </html>
