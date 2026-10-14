@@ -14,7 +14,6 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Free ATS Resume Builder - Create Single-Page A4 Resumes">
     <meta property="og:description" content="Build an ATS-optimized single-page A4 resume online for free. Clean layouts, instant live preview, zero sign-up required.">
-    <meta property="og:url" content="https://yourcvbuilder.vercel.app">
 
     <!-- Google WebApplication Schema -->
     <script type="application/ld+json">
@@ -75,7 +74,8 @@
     <style>
         .a4-page {
             width: 210mm;
-            height: 297mm;
+            min-height: 297mm;
+            max-height: 297mm;
             padding: 10mm 12mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -88,6 +88,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+        }
+
+        /* Scale preview to fit screen container gracefully */
+        .preview-wrapper {
+            transform-origin: top center;
         }
     </style>
 </head>
@@ -111,7 +116,7 @@
         
         <!-- LEFT: Form Wizard & Sticky Ad Placement -->
         <div class="space-y-4 lg:sticky lg:top-6">
-            <div class="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between max-h-[75vh] overflow-hidden">
+            <div class="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between max-h-[78vh] overflow-hidden">
                 
                 <!-- Navigation Tabs -->
                 <div id="tabs-container" class="flex border-b border-slate-200 pb-3 mb-4 justify-between text-xs font-semibold overflow-x-auto gap-2">
@@ -125,7 +130,7 @@
                 </div>
 
                 <!-- Form Step Content -->
-                <div class="flex-1 overflow-y-auto pr-2 space-y-4">
+                <div class="flex-1 overflow-y-auto pr-2 space-y-4" id="form-container">
                     
                     <!-- STEP 1 -->
                     <div id="step-1" class="wizard-step space-y-4">
@@ -133,7 +138,7 @@
                         
                         <div>
                             <label class="block text-xs font-medium text-slate-600 mb-1">Resume Template Style</label>
-                            <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
+                            <select id="input-template" class="live-input w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
                                 <option value="classic">Classic Professional (Clean & Structured)</option>
                                 <option value="modern">Modern Split (Indigo Accent Border)</option>
                                 <option value="minimal">Minimalist Clean (Serif Typography)</option>
@@ -142,32 +147,32 @@
 
                         <div>
                             <label class="block text-xs font-medium text-slate-600 mb-1">Profile Photo (Optional)</label>
-                            <input type="file" id="input-image" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700">
+                            <input type="file" id="input-image" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700">
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-medium text-slate-600">Full Name</label>
-                                <input type="text" id="input-name" value="Alex Morgan" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                                <input type="text" id="input-name" value="Alex Morgan" class="live-input mt-1 w-full p-2 text-sm border rounded">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600">Job Title</label>
-                                <input type="text" id="input-title" value="Senior Full Stack Software Engineer" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                                <input type="text" id="input-title" value="Senior Full Stack Software Engineer" class="live-input mt-1 w-full p-2 text-sm border rounded">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600">Email</label>
-                                <input type="text" id="input-email" value="alex.morgan@email.com" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                                <input type="text" id="input-email" value="alex.morgan@email.com" class="live-input mt-1 w-full p-2 text-sm border rounded">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600">Phone</label>
-                                <input type="text" id="input-phone" value="+1 (555) 382-9102" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                                <input type="text" id="input-phone" value="+1 (555) 382-9102" class="live-input mt-1 w-full p-2 text-sm border rounded">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600">Location</label>
-                                <input type="text" id="input-location" value="San Francisco, CA" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                                <input type="text" id="input-location" value="San Francisco, CA" class="live-input mt-1 w-full p-2 text-sm border rounded">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600">LinkedIn / Portfolio</label>
-                                <input type="text" id="input-links" value="linkedin.com/in/alexmorgan" oninput="updateResume()" class="mt-1 w-full p-2 text-sm border rounded">
+                                <input type="text" id="input-links" value="linkedin.com/in/alexmorgan" class="live-input mt-1 w-full p-2 text-sm border rounded">
                             </div>
                         </div>
                     </div>
@@ -175,24 +180,24 @@
                     <!-- STEP 2 -->
                     <div id="step-2" class="wizard-step space-y-4 hidden">
                         <h3 class="text-sm font-bold text-slate-900 uppercase">2. Professional Summary</h3>
-                        <textarea id="input-summary" rows="4" oninput="updateResume()" class="w-full p-2 text-sm border rounded">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</textarea>
+                        <textarea id="input-summary" rows="4" class="live-input w-full p-2 text-sm border rounded">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</textarea>
                     </div>
 
                     <!-- STEP 3 -->
                     <div id="step-3" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">3. Work Experience</h3>
-                            <button type="button" onclick="addExperience()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Job</button>
+                            <button type="button" id="add-exp-btn" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold hover:bg-indigo-100">+ Add Job</button>
                         </div>
                         <div id="experience-container" class="space-y-4">
                             <div class="p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative">
                                 <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <input type="text" placeholder="Company" value="Apex Cloud Technologies" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
-                                    <input type="text" placeholder="Role" value="Senior Engineer" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
+                                    <input type="text" placeholder="Company" value="Apex Cloud Technologies" class="live-input p-1.5 text-xs border rounded exp-company">
+                                    <input type="text" placeholder="Role" value="Senior Engineer" class="live-input p-1.5 text-xs border rounded exp-role">
                                 </div>
-                                <input type="text" placeholder="Dates" value="Jan 2022 - Present" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded exp-dates">
-                                <textarea placeholder="Accomplishments..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded exp-desc">Architected microservices using Node.js and AWS, reducing latency by 35%.</textarea>
+                                <input type="text" placeholder="Dates" value="Jan 2022 - Present" class="live-input w-full p-1.5 text-xs border rounded exp-dates">
+                                <textarea placeholder="Accomplishments..." rows="2" class="live-input w-full p-1.5 text-xs border rounded exp-desc">Architected microservices using Node.js and AWS, reducing latency by 35%.</textarea>
                             </div>
                         </div>
                     </div>
@@ -201,14 +206,14 @@
                     <div id="step-4" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">4. Key Projects</h3>
-                            <button type="button" onclick="addProject()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Project</button>
+                            <button type="button" id="add-proj-btn" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold hover:bg-indigo-100">+ Add Project</button>
                         </div>
                         <div id="project-container" class="space-y-4">
                             <div class="p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative">
                                 <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                                <input type="text" placeholder="Project Name" value="CloudScale Dashboard" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
-                                <input type="text" placeholder="Technologies" value="React, Node.js, Docker" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
-                                <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc">Built a real-time monitoring tool utilized by over 5,000 developers.</textarea>
+                                <input type="text" placeholder="Project Name" value="CloudScale Dashboard" class="live-input w-full p-1.5 text-xs border rounded proj-name">
+                                <input type="text" placeholder="Technologies" value="React, Node.js, Docker" class="live-input w-full p-1.5 text-xs border rounded proj-tech">
+                                <textarea placeholder="Description..." rows="2" class="live-input w-full p-1.5 text-xs border rounded proj-desc">Built a real-time monitoring tool utilized by over 5,000 developers.</textarea>
                             </div>
                         </div>
                     </div>
@@ -217,16 +222,16 @@
                     <div id="step-5" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">5. Education</h3>
-                            <button type="button" onclick="addEducation()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Degree</button>
+                            <button type="button" id="add-edu-btn" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold hover:bg-indigo-100">+ Add Degree</button>
                         </div>
                         <div id="education-container" class="space-y-4">
                             <div class="p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative">
                                 <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <input type="text" placeholder="Degree" value="B.S. in Computer Science" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
-                                    <input type="text" placeholder="Institution" value="UC Berkeley" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
+                                    <input type="text" placeholder="Degree" value="B.S. in Computer Science" class="live-input p-1.5 text-xs border rounded edu-degree">
+                                    <input type="text" placeholder="Institution" value="UC Berkeley" class="live-input p-1.5 text-xs border rounded edu-uni">
                                 </div>
-                                <input type="text" placeholder="Year" value="2019" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded edu-year">
+                                <input type="text" placeholder="Year" value="2019" class="live-input w-full p-1.5 text-xs border rounded edu-year">
                             </div>
                         </div>
                     </div>
@@ -236,11 +241,11 @@
                         <h3 class="text-sm font-bold text-slate-900 uppercase">6. Skills & Certifications</h3>
                         <div>
                             <label class="block text-xs font-medium text-slate-600 mb-1">Certifications</label>
-                            <input type="text" id="input-certs" value="AWS Certified Solutions Architect, Certified Kubernetes Administrator" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
+                            <input type="text" id="input-certs" value="AWS Certified Solutions Architect, Certified Kubernetes Administrator" class="live-input w-full p-2 text-sm border rounded">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-slate-600 mb-1">Technical Skills</label>
-                            <input type="text" id="input-skills" value="JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
+                            <input type="text" id="input-skills" value="JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS" class="live-input w-full p-2 text-sm border rounded">
                         </div>
                     </div>
 
@@ -248,7 +253,7 @@
                     <div id="step-7" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">7. Professional References</h3>
-                            <button type="button" onclick="addReference()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Reference</button>
+                            <button type="button" id="add-ref-btn" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold hover:bg-indigo-100">+ Add Reference</button>
                         </div>
                         <div id="reference-container" class="space-y-4"></div>
                     </div>
@@ -258,7 +263,7 @@
                 <!-- Navigation Controls -->
                 <div class="flex justify-between pt-4 border-t border-slate-200 mt-4">
                     <button type="button" id="prev-btn" onclick="changeStep(-1)" class="bg-slate-200 text-slate-700 px-4 py-2 rounded text-xs font-semibold opacity-50 cursor-not-allowed" disabled>Previous</button>
-                    <button type="button" id="next-btn" onclick="changeStep(1)" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-semibold">Next Step</button>
+                    <button type="button" id="next-btn" onclick="changeStep(1)" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-semibold hover:bg-indigo-700">Next Step</button>
                 </div>
 
             </div>
@@ -285,44 +290,44 @@
                     </div>
 
                     <!-- Summary -->
-                    <div class="mb-1">
-                        <h3 id="heading-summary" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Summary</h3>
+                    <div id="preview-summary-section" class="mb-1">
+                        <h3 class="preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Summary</h3>
                         <p id="preview-summary" class="text-[8pt] text-slate-700">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</p>
                     </div>
 
                     <!-- Experience -->
-                    <div class="mb-1">
-                        <h3 id="heading-experience" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Experience</h3>
-                        <div id="preview-experience" class="space-y-0.5 text-[8pt]"></div>
+                    <div id="preview-experience-section" class="mb-1">
+                        <h3 class="preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional Experience</h3>
+                        <div id="preview-experience" class="space-y-1 text-[8pt]"></div>
                     </div>
 
                     <!-- Projects -->
-                    <div class="mb-1">
-                        <h3 id="heading-projects" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Key Projects</h3>
-                        <div id="preview-projects" class="space-y-0.5 text-[8pt]"></div>
+                    <div id="preview-projects-section" class="mb-1">
+                        <h3 class="preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Key Projects</h3>
+                        <div id="preview-projects" class="space-y-1 text-[8pt]"></div>
                     </div>
 
                     <!-- Education -->
-                    <div class="mb-1">
-                        <h3 id="heading-education" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Education</h3>
+                    <div id="preview-education-section" class="mb-1">
+                        <h3 class="preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Education</h3>
                         <div id="preview-education" class="space-y-0.5 text-[8pt]"></div>
                     </div>
 
                     <!-- Certifications -->
-                    <div class="mb-1">
-                        <h3 id="heading-certs" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Certifications</h3>
+                    <div id="preview-certs-section" class="mb-1">
+                        <h3 class="preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Certifications</h3>
                         <p id="preview-certs" class="text-[8pt] text-slate-700">AWS Certified Solutions Architect, Certified Kubernetes Administrator</p>
                     </div>
 
                     <!-- Skills -->
-                    <div class="mb-1">
-                        <h3 id="heading-skills" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Technical Skills</h3>
+                    <div id="preview-skills-section" class="mb-1">
+                        <h3 class="preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Technical Skills</h3>
                         <p id="preview-skills" class="text-[8pt] text-slate-700">JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS</p>
                     </div>
 
                     <!-- References -->
                     <div id="preview-references-section" class="mb-0.5 hidden">
-                        <h3 id="heading-refs" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional References</h3>
+                        <h3 class="preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5">Professional References</h3>
                         <div id="preview-references" class="grid grid-cols-2 gap-1 text-[7.5pt]"></div>
                     </div>
                 </div>
@@ -377,7 +382,6 @@
             <span>Advertisement Space (Footer Banner Ad)</span>
         </div>
         
-        <!-- Keyword Links for Internal Link juice -->
         <div class="max-w-4xl mx-auto mb-3 flex flex-wrap justify-center gap-4 text-indigo-600 font-medium">
             <a href="index.html" class="hover:underline">Free ATS Resume Builder</a>
             <a href="software-engineer.html" class="hover:underline">Software Engineer Resume Builder</a>
@@ -389,10 +393,12 @@
         <p class="text-slate-400">&copy; 2026 Free ATS Resume Builder. Single-page A4 PDF resumes with zero sign-up required.</p>
     </footer>
 
+    <!-- ROBUST REAL-TIME PREVIEW CONTROLLER SCRIPT -->
     <script>
         let currentStep = 1;
         const totalSteps = 7;
 
+        // Step Navigation
         function setStep(step) {
             currentStep = step;
             for (let i = 1; i <= totalSteps; i++) {
@@ -426,7 +432,6 @@
             currentStep += direction;
             if (currentStep > totalSteps) {
                 currentStep = totalSteps;
-                alert("Your resume is ready for download!");
             } else if (currentStep < 1) {
                 currentStep = 1;
             }
@@ -434,7 +439,7 @@
         }
 
         function handleImageUpload(event) {
-            const file = event.target.files[0];
+            const file = event.target.files && event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -454,76 +459,10 @@
             }
         }
 
-        function addExperience() {
-            const container = document.getElementById('experience-container');
-            if (!container) return;
-            const div = document.createElement('div');
-            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative';
-            div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" placeholder="Company" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
-                    <input type="text" placeholder="Role" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
-                </div>
-                <input type="text" placeholder="Dates" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded exp-dates">
-                <textarea placeholder="Accomplishments..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded exp-desc"></textarea>
-            `;
-            container.appendChild(div);
-            updateResume();
-        }
-
-        function addProject() {
-            const container = document.getElementById('project-container');
-            if (!container) return;
-            const div = document.createElement('div');
-            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative';
-            div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                <input type="text" placeholder="Project Name" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
-                <input type="text" placeholder="Technologies" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
-                <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc"></textarea>
-            `;
-            container.appendChild(div);
-            updateResume();
-        }
-
-        function addEducation() {
-            const container = document.getElementById('education-container');
-            if (!container) return;
-            const div = document.createElement('div');
-            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative';
-            div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" placeholder="Degree" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
-                    <input type="text" placeholder="Institution" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
-                </div>
-                <input type="text" placeholder="Year" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded edu-year">
-            `;
-            container.appendChild(div);
-            updateResume();
-        }
-
-        function addReference() {
-            const container = document.getElementById('reference-container');
-            if (!container) return;
-            const div = document.createElement('div');
-            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 ref-item relative';
-            div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
-                <div class="grid grid-cols-2 gap-2">
-                    <input type="text" placeholder="Name" oninput="updateResume()" class="p-1.5 text-xs border rounded ref-name">
-                    <input type="text" placeholder="Title & Company" oninput="updateResume()" class="p-1.5 text-xs border rounded ref-title">
-                </div>
-                <input type="text" placeholder="Contact Info" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded ref-contact">
-            `;
-            container.appendChild(div);
-            updateResume();
-        }
-
+        // Helper utilities
         function safeSetText(id, text) {
             const el = document.getElementById(id);
-            if (el) el.innerText = text;
+            if (el) el.textContent = text || '';
         }
 
         function safeVal(id) {
@@ -531,6 +470,17 @@
             return el ? el.value.trim() : '';
         }
 
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Core Live Update Function
         function updateResume() {
             try {
                 const template = safeVal('input-template') || 'classic';
@@ -547,83 +497,108 @@
                 ].filter(Boolean);
                 safeSetText('preview-contact', contactParts.join(' • '));
 
-                // Summary & Skills
-                safeSetText('preview-summary', safeVal('input-summary'));
-                safeSetText('preview-certs', safeVal('input-certs'));
-                safeSetText('preview-skills', safeVal('input-skills'));
+                // Summary
+                const summaryVal = safeVal('input-summary');
+                safeSetText('preview-summary', summaryVal);
+                const summarySec = document.getElementById('preview-summary-section');
+                if (summarySec) {
+                    summarySec.style.display = summaryVal ? 'block' : 'none';
+                }
+
+                // Certs & Skills
+                const certsVal = safeVal('input-certs');
+                safeSetText('preview-certs', certsVal);
+                const certsSec = document.getElementById('preview-certs-section');
+                if (certsSec) certsSec.style.display = certsVal ? 'block' : 'none';
+
+                const skillsVal = safeVal('input-skills');
+                safeSetText('preview-skills', skillsVal);
+                const skillsSec = document.getElementById('preview-skills-section');
+                if (skillsSec) skillsSec.style.display = skillsVal ? 'block' : 'none';
 
                 // Dynamic Template Styles
                 const headerWrap = document.getElementById('preview-header-wrap');
                 const previewRoot = document.getElementById('resume-preview');
-                const hHeadings = document.querySelectorAll('#resume-preview h3');
+                const hHeadings = document.querySelectorAll('#resume-preview .preview-heading');
 
                 if (previewRoot && headerWrap) {
                     if (template === 'modern') {
                         previewRoot.style.fontFamily = 'Arial, sans-serif';
                         headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-1.5 mb-1.5 bg-indigo-50/50 p-1.5 rounded";
-                        hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-0.5");
+                        hHeadings.forEach(h => h.className = "preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-0.5");
                     } else if (template === 'minimal') {
                         previewRoot.style.fontFamily = 'Georgia, serif';
                         headerWrap.className = "w-full text-center border-b border-zinc-400 pb-1.5 mb-1.5";
-                        hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-0.5");
+                        hHeadings.forEach(h => h.className = "preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-0.5");
                     } else {
                         previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
                         headerWrap.className = "w-full text-center border-b border-slate-300 pb-1.5 mb-1.5";
-                        hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5");
+                        hHeadings.forEach(h => h.className = "preview-heading text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5");
                     }
                 }
 
                 // Experience Loop
                 const expContainer = document.getElementById('preview-experience');
-                if (expContainer) {
+                const expSec = document.getElementById('preview-experience-section');
+                if (expContainer && expSec) {
                     expContainer.innerHTML = '';
+                    let hasExp = false;
                     document.querySelectorAll('.exp-item').forEach(item => {
-                        const company = item.querySelector('.exp-company')?.value || '';
-                        const role = item.querySelector('.exp-role')?.value || '';
-                        const dates = item.querySelector('.exp-dates')?.value || '';
-                        const desc = item.querySelector('.exp-desc')?.value || '';
+                        const company = escapeHTML(item.querySelector('.exp-company')?.value || '');
+                        const role = escapeHTML(item.querySelector('.exp-role')?.value || '');
+                        const dates = escapeHTML(item.querySelector('.exp-dates')?.value || '');
+                        const desc = escapeHTML(item.querySelector('.exp-desc')?.value || '');
                         if (company || role || desc) {
+                            hasExp = true;
                             expContainer.innerHTML += `
                                 <div>
                                     <div class="flex justify-between font-semibold text-slate-900">
                                         <span>${role}${role && company ? ' — ' : ''}${company}</span>
                                         <span>${dates}</span>
                                     </div>
-                                    <p class="text-slate-700">${desc}</p>
+                                    <p class="text-slate-700 mt-0.5">${desc}</p>
                                 </div>`;
                         }
                     });
+                    expSec.style.display = hasExp ? 'block' : 'none';
                 }
 
                 // Projects Loop
                 const projContainer = document.getElementById('preview-projects');
-                if (projContainer) {
+                const projSec = document.getElementById('preview-projects-section');
+                if (projContainer && projSec) {
                     projContainer.innerHTML = '';
+                    let hasProj = false;
                     document.querySelectorAll('.proj-item').forEach(item => {
-                        const name = item.querySelector('.proj-name')?.value || '';
-                        const tech = item.querySelector('.proj-tech')?.value || '';
-                        const desc = item.querySelector('.proj-desc')?.value || '';
+                        const name = escapeHTML(item.querySelector('.proj-name')?.value || '');
+                        const tech = escapeHTML(item.querySelector('.proj-tech')?.value || '');
+                        const desc = escapeHTML(item.querySelector('.proj-desc')?.value || '');
                         if (name || desc) {
+                            hasProj = true;
                             projContainer.innerHTML += `
                                 <div>
                                     <div class="flex justify-between font-semibold text-slate-900">
                                         <span>${name} ${tech ? `<span class="font-normal text-slate-600">(${tech})</span>` : ''}</span>
                                     </div>
-                                    <p class="text-slate-700">${desc}</p>
+                                    <p class="text-slate-700 mt-0.5">${desc}</p>
                                 </div>`;
                         }
                     });
+                    projSec.style.display = hasProj ? 'block' : 'none';
                 }
 
                 // Education Loop
                 const eduContainer = document.getElementById('preview-education');
-                if (eduContainer) {
+                const eduSec = document.getElementById('preview-education-section');
+                if (eduContainer && eduSec) {
                     eduContainer.innerHTML = '';
+                    let hasEdu = false;
                     document.querySelectorAll('.edu-item').forEach(item => {
-                        const degree = item.querySelector('.edu-degree')?.value || '';
-                        const uni = item.querySelector('.edu-uni')?.value || '';
-                        const year = item.querySelector('.edu-year')?.value || '';
+                        const degree = escapeHTML(item.querySelector('.edu-degree')?.value || '');
+                        const uni = escapeHTML(item.querySelector('.edu-uni')?.value || '');
+                        const year = escapeHTML(item.querySelector('.edu-year')?.value || '');
                         if (degree || uni) {
+                            hasEdu = true;
                             eduContainer.innerHTML += `
                                 <div class="flex justify-between">
                                     <span class="font-semibold text-slate-900">${degree}${degree && uni ? ' — ' : ''}${uni}</span>
@@ -631,41 +606,106 @@
                                 </div>`;
                         }
                     });
+                    eduSec.style.display = hasEdu ? 'block' : 'none';
                 }
 
                 // References Loop
                 const refContainer = document.getElementById('preview-references');
                 const refSection = document.getElementById('preview-references-section');
-                const refItems = document.querySelectorAll('.ref-item');
                 if (refContainer && refSection) {
                     refContainer.innerHTML = '';
-                    if (refItems.length > 0) {
+                    let hasRef = false;
+                    document.querySelectorAll('.ref-item').forEach(item => {
+                        const name = escapeHTML(item.querySelector('.ref-name')?.value || '');
+                        const title = escapeHTML(item.querySelector('.ref-title')?.value || '');
+                        const contact = escapeHTML(item.querySelector('.ref-contact')?.value || '');
+                        if (name || title || contact) {
+                            hasRef = true;
+                            refContainer.innerHTML += `
+                                <div>
+                                    <p class="font-semibold text-slate-900">${name} ${title ? `(${title})` : ''}</p>
+                                    <p class="text-indigo-600">${contact}</p>
+                                </div>`;
+                        }
+                    });
+                    if (hasRef) {
                         refSection.classList.remove('hidden');
-                        refItems.forEach(item => {
-                            const name = item.querySelector('.ref-name')?.value || '';
-                            const title = item.querySelector('.ref-title')?.value || '';
-                            const contact = item.querySelector('.ref-contact')?.value || '';
-                            if (name || title) {
-                                refContainer.innerHTML += `
-                                    <div>
-                                        <p class="font-semibold text-slate-900">${name} ${title ? `(${title})` : ''}</p>
-                                        <p class="text-indigo-600">${contact}</p>
-                                    </div>`;
-                            }
-                        });
                     } else {
                         refSection.classList.add('hidden');
                     }
                 }
             } catch (err) {
-                console.error("Error updating resume preview:", err);
+                console.error("Live preview render caught error:", err);
             }
         }
 
-        // Initial render call on page load
-        document.addEventListener("DOMContentLoaded", () => {
+        // Add Repeater Functions with Auto-Listener binding
+        function addExperience() {
+            const container = document.getElementById('experience-container');
+            if (!container) return;
+            const div = document.createElement('div');
+            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative';
+            div.innerHTML = `
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" placeholder="Company" class="live-input p-1.5 text-xs border rounded exp-company">
+                    <input type="text" placeholder="Role" class="live-input p-1.5 text-xs border rounded exp-role">
+                </div>
+                <input type="text" placeholder="Dates" class="live-input w-full p-1.5 text-xs border rounded exp-dates">
+                <textarea placeholder="Accomplishments..." rows="2" class="live-input w-full p-1.5 text-xs border rounded exp-desc"></textarea>
+            `;
+            container.appendChild(div);
             updateResume();
-        });
+        }
+
+        function addProject() {
+            const container = document.getElementById('project-container');
+            if (!container) return;
+            const div = document.createElement('div');
+            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative';
+            div.innerHTML = `
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <input type="text" placeholder="Project Name" class="live-input w-full p-1.5 text-xs border rounded proj-name">
+                <input type="text" placeholder="Technologies" class="live-input w-full p-1.5 text-xs border rounded proj-tech">
+                <textarea placeholder="Description..." rows="2" class="live-input w-full p-1.5 text-xs border rounded proj-desc"></textarea>
+            `;
+            container.appendChild(div);
+            updateResume();
+        }
+
+        function addEducation() {
+            const container = document.getElementById('education-container');
+            if (!container) return;
+            const div = document.createElement('div');
+            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative';
+            div.innerHTML = `
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" placeholder="Degree" class="live-input p-1.5 text-xs border rounded edu-degree">
+                    <input type="text" placeholder="Institution" class="live-input p-1.5 text-xs border rounded edu-uni">
+                </div>
+                <input type="text" placeholder="Year" class="live-input w-full p-1.5 text-xs border rounded edu-year">
+            `;
+            container.appendChild(div);
+            updateResume();
+        }
+
+        function addReference() {
+            const container = document.getElementById('reference-container');
+            if (!container) return;
+            const div = document.createElement('div');
+            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 ref-item relative';
+            div.innerHTML = `
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" placeholder="Name" class="live-input p-1.5 text-xs border rounded ref-name">
+                    <input type="text" placeholder="Title & Company" class="live-input p-1.5 text-xs border rounded ref-title">
+                </div>
+                <input type="text" placeholder="Contact Info" class="live-input w-full p-1.5 text-xs border rounded ref-contact">
+            `;
+            container.appendChild(div);
+            updateResume();
+        }
 
         function downloadPDF() {
             const element = document.getElementById('resume-preview');
@@ -678,6 +718,35 @@
             };
             html2pdf().from(element).set(options).save();
         }
+
+        // Attach Global Live Event Delegation (Captures all keystrokes, edits, and template updates instantly)
+        document.addEventListener('DOMContentLoaded', () => {
+            const formContainer = document.getElementById('form-container');
+            
+            // Listen for input and change events at document root via event delegation
+            ['input', 'keyup', 'change'].forEach(evtType => {
+                document.addEventListener(evtType, (e) => {
+                    if (e.target && (e.target.matches('input, textarea, select') || e.target.classList.contains('live-input'))) {
+                        updateResume();
+                    }
+                });
+            });
+
+            // Image Handler
+            const imgInput = document.getElementById('input-image');
+            if (imgInput) {
+                imgInput.addEventListener('change', handleImageUpload);
+            }
+
+            // Bind Repeater Buttons
+            document.getElementById('add-exp-btn')?.addEventListener('click', addExperience);
+            document.getElementById('add-proj-btn')?.addEventListener('click', addProject);
+            document.getElementById('add-edu-btn')?.addEventListener('click', addEducation);
+            document.getElementById('add-ref-btn')?.addEventListener('click', addReference);
+
+            // Initial render call
+            updateResume();
+        });
     </script>
 </body>
 </html>
