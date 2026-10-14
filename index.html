@@ -382,6 +382,7 @@
             <a href="index.html" class="hover:underline">Free ATS Resume Builder</a>
             <a href="software-engineer.html" class="hover:underline">Software Engineer Resume Builder</a>
             <a href="hr-assistant.html" class="hover:underline">HR Assistant Resume Builder</a>
+            <a href="data-analyst.html" class="hover:underline">Data Analyst Resume Builder</a>
             <a href="privacy.html" class="hover:underline text-slate-500">Privacy Policy</a>
         </div>
 
@@ -447,8 +448,10 @@
         }
 
         function removeItem(button) {
-            button.parentElement.remove();
-            updateResume();
+            if (button && button.parentElement) {
+                button.parentElement.remove();
+                updateResume();
+            }
         }
 
         function addExperience() {
@@ -518,129 +521,151 @@
             updateResume();
         }
 
+        function safeSetText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        function safeVal(id) {
+            const el = document.getElementById(id);
+            return el ? el.value.trim() : '';
+        }
+
         function updateResume() {
-            const val = function(id) {
-                const el = document.getElementById(id);
-                return el ? el.value : '';
-            };
-            const template = val('input-template');
-            
-            if(document.getElementById('preview-name')) document.getElementById('preview-name').innerText = val('input-name');
-            if(document.getElementById('preview-title')) document.getElementById('preview-title').innerText = val('input-title');
-            if(document.getElementById('preview-contact')) document.getElementById('preview-contact').innerText = val('input-email') + ' • ' + val('input-phone') + ' • ' + val('input-location') + ' • ' + val('input-links');
-            if(document.getElementById('preview-summary')) document.getElementById('preview-summary').innerText = val('input-summary');
-            if(document.getElementById('preview-certs')) document.getElementById('preview-certs').innerText = val('input-certs');
-            if(document.getElementById('preview-skills')) document.getElementById('preview-skills').innerText = val('input-skills');
+            try {
+                const template = safeVal('input-template') || 'classic';
+                
+                // Header Info
+                safeSetText('preview-name', safeVal('input-name') || 'Alex Morgan');
+                safeSetText('preview-title', safeVal('input-title') || 'Senior Full Stack Software Engineer');
+                
+                const contactParts = [
+                    safeVal('input-email'),
+                    safeVal('input-phone'),
+                    safeVal('input-location'),
+                    safeVal('input-links')
+                ].filter(Boolean);
+                safeSetText('preview-contact', contactParts.join(' • '));
 
-            // Apply Dynamic Template Styles
-            const headerWrap = document.getElementById('preview-header-wrap');
-            const previewRoot = document.getElementById('resume-preview');
-            const hHeadings = document.querySelectorAll('#resume-preview h3');
+                // Summary & Skills
+                safeSetText('preview-summary', safeVal('input-summary'));
+                safeSetText('preview-certs', safeVal('input-certs'));
+                safeSetText('preview-skills', safeVal('input-skills'));
 
-            if (template === 'modern') {
-                previewRoot.style.fontFamily = 'Arial, sans-serif';
-                headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-1.5 mb-1.5 bg-indigo-50/50 p-1.5 rounded";
-                hHeadings.forEach(function(h) {
-                    h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-0.5";
-                });
-            } else if (template === 'minimal') {
-                previewRoot.style.fontFamily = 'Georgia, serif';
-                headerWrap.className = "w-full text-center border-b border-zinc-400 pb-1.5 mb-1.5";
-                hHeadings.forEach(function(h) {
-                    h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-0.5";
-                });
-            } else {
-                // Classic
-                previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
-                headerWrap.className = "w-full text-center border-b border-slate-300 pb-1.5 mb-1.5";
-                hHeadings.forEach(function(h) {
-                    h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5";
-                });
-            }
+                // Dynamic Template Styles
+                const headerWrap = document.getElementById('preview-header-wrap');
+                const previewRoot = document.getElementById('resume-preview');
+                const hHeadings = document.querySelectorAll('#resume-preview h3');
 
-            // Experience Loop
-            const expContainer = document.getElementById('preview-experience');
-            if (expContainer) {
-                expContainer.innerHTML = '';
-                document.querySelectorAll('.exp-item').forEach(function(item) {
-                    const company = item.querySelector('.exp-company') ? item.querySelector('.exp-company').value : '';
-                    const role = item.querySelector('.exp-role') ? item.querySelector('.exp-role').value : '';
-                    const dates = item.querySelector('.exp-dates') ? item.querySelector('.exp-dates').value : '';
-                    const desc = item.querySelector('.exp-desc') ? item.querySelector('.exp-desc').value : '';
-                    if(company || role || desc) {
-                        expContainer.innerHTML += '<div>' +
-                            '<div class="flex justify-between font-semibold text-slate-900">' +
-                                '<span>' + role + ' — ' + company + '</span>' +
-                                '<span>' + dates + '</span>' +
-                            '</div>' +
-                            '<p class="text-slate-700">' + desc + '</p>' +
-                        '</div>';
+                if (previewRoot && headerWrap) {
+                    if (template === 'modern') {
+                        previewRoot.style.fontFamily = 'Arial, sans-serif';
+                        headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-1.5 mb-1.5 bg-indigo-50/50 p-1.5 rounded";
+                        hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-0.5");
+                    } else if (template === 'minimal') {
+                        previewRoot.style.fontFamily = 'Georgia, serif';
+                        headerWrap.className = "w-full text-center border-b border-zinc-400 pb-1.5 mb-1.5";
+                        hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-0.5");
+                    } else {
+                        previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
+                        headerWrap.className = "w-full text-center border-b border-slate-300 pb-1.5 mb-1.5";
+                        hHeadings.forEach(h => h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-0.5");
                     }
-                });
-            }
+                }
 
-            // Projects Loop
-            const projContainer = document.getElementById('preview-projects');
-            if (projContainer) {
-                projContainer.innerHTML = '';
-                document.querySelectorAll('.proj-item').forEach(function(item) {
-                    const name = item.querySelector('.proj-name') ? item.querySelector('.proj-name').value : '';
-                    const tech = item.querySelector('.proj-tech') ? item.querySelector('.proj-tech').value : '';
-                    const desc = item.querySelector('.proj-desc') ? item.querySelector('.proj-desc').value : '';
-                    if(name || desc) {
-                        projContainer.innerHTML += '<div>' +
-                            '<div class="flex justify-between font-semibold text-slate-900">' +
-                                '<span>' + name + ' <span class="font-normal text-slate-600">(' + tech + ')</span></span>' +
-                            '</div>' +
-                            '<p class="text-slate-700">' + desc + '</p>' +
-                        '</div>';
-                    }
-                });
-            }
-
-            // Education Loop
-            const eduContainer = document.getElementById('preview-education');
-            if (eduContainer) {
-                eduContainer.innerHTML = '';
-                document.querySelectorAll('.edu-item').forEach(function(item) {
-                    const degree = item.querySelector('.edu-degree') ? item.querySelector('.edu-degree').value : '';
-                    const uni = item.querySelector('.edu-uni') ? item.querySelector('.edu-uni').value : '';
-                    const year = item.querySelector('.edu-year') ? item.querySelector('.edu-year').value : '';
-                    if(degree || uni) {
-                        eduContainer.innerHTML += '<div class="flex justify-between">' +
-                            '<span class="font-semibold text-slate-900">' + degree + ' — ' + uni + '</span>' +
-                            '<span class="text-slate-600">' + year + '</span>' +
-                        '</div>';
-                    }
-                });
-            }
-
-            // References Loop
-            const refContainer = document.getElementById('preview-references');
-            const refSection = document.getElementById('preview-references-section');
-            const refItems = document.querySelectorAll('.ref-item');
-            if (refContainer && refSection) {
-                refContainer.innerHTML = '';
-                if (refItems.length > 0) {
-                    refSection.classList.remove('hidden');
-                    refItems.forEach(function(item) {
-                        const name = item.querySelector('.ref-name') ? item.querySelector('.ref-name').value : '';
-                        const title = item.querySelector('.ref-title') ? item.querySelector('.ref-title').value : '';
-                        const contact = item.querySelector('.ref-contact') ? item.querySelector('.ref-contact').value : '';
-                        if(name || title) {
-                            refContainer.innerHTML += '<div>' +
-                                '<p class="font-semibold text-slate-900">' + name + ' (' + title + ')</p>' +
-                                '<p class="text-indigo-600">' + contact + '</p>' +
-                            '</div>';
+                // Experience Loop
+                const expContainer = document.getElementById('preview-experience');
+                if (expContainer) {
+                    expContainer.innerHTML = '';
+                    document.querySelectorAll('.exp-item').forEach(item => {
+                        const company = item.querySelector('.exp-company')?.value || '';
+                        const role = item.querySelector('.exp-role')?.value || '';
+                        const dates = item.querySelector('.exp-dates')?.value || '';
+                        const desc = item.querySelector('.exp-desc')?.value || '';
+                        if (company || role || desc) {
+                            expContainer.innerHTML += `
+                                <div>
+                                    <div class="flex justify-between font-semibold text-slate-900">
+                                        <span>${role}${role && company ? ' — ' : ''}${company}</span>
+                                        <span>${dates}</span>
+                                    </div>
+                                    <p class="text-slate-700">${desc}</p>
+                                </div>`;
                         }
                     });
-                } else {
-                    refSection.classList.add('hidden');
                 }
+
+                // Projects Loop
+                const projContainer = document.getElementById('preview-projects');
+                if (projContainer) {
+                    projContainer.innerHTML = '';
+                    document.querySelectorAll('.proj-item').forEach(item => {
+                        const name = item.querySelector('.proj-name')?.value || '';
+                        const tech = item.querySelector('.proj-tech')?.value || '';
+                        const desc = item.querySelector('.proj-desc')?.value || '';
+                        if (name || desc) {
+                            projContainer.innerHTML += `
+                                <div>
+                                    <div class="flex justify-between font-semibold text-slate-900">
+                                        <span>${name} ${tech ? `<span class="font-normal text-slate-600">(${tech})</span>` : ''}</span>
+                                    </div>
+                                    <p class="text-slate-700">${desc}</p>
+                                </div>`;
+                        }
+                    });
+                }
+
+                // Education Loop
+                const eduContainer = document.getElementById('preview-education');
+                if (eduContainer) {
+                    eduContainer.innerHTML = '';
+                    document.querySelectorAll('.edu-item').forEach(item => {
+                        const degree = item.querySelector('.edu-degree')?.value || '';
+                        const uni = item.querySelector('.edu-uni')?.value || '';
+                        const year = item.querySelector('.edu-year')?.value || '';
+                        if (degree || uni) {
+                            eduContainer.innerHTML += `
+                                <div class="flex justify-between">
+                                    <span class="font-semibold text-slate-900">${degree}${degree && uni ? ' — ' : ''}${uni}</span>
+                                    <span class="text-slate-600">${year}</span>
+                                </div>`;
+                        }
+                    });
+                }
+
+                // References Loop
+                const refContainer = document.getElementById('preview-references');
+                const refSection = document.getElementById('preview-references-section');
+                const refItems = document.querySelectorAll('.ref-item');
+                if (refContainer && refSection) {
+                    refContainer.innerHTML = '';
+                    if (refItems.length > 0) {
+                        refSection.classList.remove('hidden');
+                        refItems.forEach(item => {
+                            const name = item.querySelector('.ref-name')?.value || '';
+                            const title = item.querySelector('.ref-title')?.value || '';
+                            const contact = item.querySelector('.ref-contact')?.value || '';
+                            if (name || title) {
+                                refContainer.innerHTML += `
+                                    <div>
+                                        <p class="font-semibold text-slate-900">${name} ${title ? `(${title})` : ''}</p>
+                                        <p class="text-indigo-600">${contact}</p>
+                                    </div>`;
+                            }
+                        });
+                    } else {
+                        refSection.classList.add('hidden');
+                    }
+                }
+            } catch (err) {
+                console.error("Error updating resume preview:", err);
             }
         }
 
-        updateResume();
+        // Initial render call on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            updateResume();
+        });
 
         function downloadPDF() {
             const element = document.getElementById('resume-preview');
