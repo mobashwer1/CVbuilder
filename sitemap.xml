@@ -16,6 +16,16 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://yourcvbuilder.vercel.app/data-analyst.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://yourcvbuilder.vercel.app/hr-assistant.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://yourcvbuilder.vercel.app/privacy.html</loc>
     <lastmod>2026-10-13</lastmod>
     <priority>0.30</priority>
