@@ -72,32 +72,31 @@
     <!-- html2pdf Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
-    <style>
-        .a4-page {
-            width: 100%;
-            max-width: 210mm;
-            min-height: 297mm;
-            padding: 10mm 12mm;
-            background: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-            letter-spacing: normal;
-            word-spacing: normal;
-            -webkit-font-smoothing: antialiased;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin: 0 auto;
-        }
+   <style>
+    .a4-page {
+        width: 100%;
+        max-width: 210mm;
+        min-height: 297mm;
+        padding: 10mm 12mm;
+        background: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: normal;
+        word-spacing: normal;
+        -webkit-font-smoothing: antialiased;
+        overflow: visible; /* Allows content to flow naturally across pages */
+        display: block;    /* Removes flex constraints that trap height */
+        margin: 0 auto;
+    }
 
-        #resume-preview * {
-            box-sizing: border-box;
-            max-width: 100%;
-            word-break: break-word;
-        }
-    </style>
+    #resume-preview * {
+        box-sizing: border-box;
+        max-width: 100%;
+        word-break: break-word;
+    }
+</style>
+        
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
@@ -711,17 +710,19 @@
             updateResume();
         });
 
-        function downloadPDF() {
-            const element = document.getElementById('resume-preview');
-            const options = {
-                margin:       0,
-                filename:     'Professional_Resume.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
-            html2pdf().from(element).set(options).save();
-        }
+      function downloadPDF() {
+    const element = document.getElementById('resume-preview');
+    const options = {
+        margin:       [10, 10, 10, 10], // top, left, bottom, right margins in mm
+        filename:     'Professional_Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'] }
+    };
+    html2pdf().from(element).set(options).save();
+}
+    
     </script>
 </body>
 </html>
