@@ -72,10 +72,11 @@
     <!-- html2pdf Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
-    <style>
+   <style>
         .a4-page {
-            width: 210mm;
-            height: 297mm;
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
             padding: 10mm 12mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -88,6 +89,13 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+        }
+
+        /* Prevent text clipping inside preview container */
+        #resume-preview * {
+            box-sizing: border-box;
+            max-width: 100%;
+            word-break: break-word;
         }
     </style>
 </head>
