@@ -3,100 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free ATS Resume Builder - Create Single-Page A4 Resumes</title>
+    <title>Free ATS Resume Builder - Create Professional A4 Resumes</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Build an ATS-optimized single-page A4 resume online for free. Download clean, professional PDF resumes instantly with zero registration or watermarks.">
-    <meta name="keywords" content="free ATS resume builder, A4 resume generator, one page CV maker, ATS compliant resume templates, free PDF resume, single page resume creator">
+    <meta name="description" content="Build an ATS-optimized professional resume online for free. Download clean, single or multi-page A4 PDF resumes instantly with zero registration or watermarks.">
+    <meta name="keywords" content="free ATS resume builder, A4 resume generator, professional CV maker, ATS compliant resume templates, free PDF resume">
     <meta name="robots" content="index, follow">
 
     <!-- OpenGraph / Social Previews -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Free ATS Resume Builder - Create Single-Page A4 Resumes">
-    <meta property="og:description" content="Build an ATS-optimized single-page A4 resume online for free. Clean layouts, instant live preview, zero sign-up required.">
+    <meta property="og:title" content="Free ATS Resume Builder - Create Professional A4 Resumes">
+    <meta property="og:description" content="Build an ATS-optimized professional resume online for free. Clean layouts, instant live preview, zero sign-up required.">
     <meta property="og:url" content="https://yourcvbuilder.vercel.app">
-
-    <!-- Google WebApplication Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Free ATS Resume Builder",
-      "url": "https://yourcvbuilder.vercel.app",
-      "operatingSystem": "All",
-      "applicationCategory": "BusinessApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
-
-    <!-- Google FAQ Schema for Rich Search Snippets -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Is this ATS Resume Builder completely free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, our resume builder is 100% free forever. You can create, preview, and download unlimited single-page A4 PDF resumes without any hidden fees, subscriptions, or watermarks."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is my personal information stored on a server?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. All resume data processing happens locally inside your web browser. Your details are never transmitted, saved, or uploaded to external databases."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What makes a resume ATS-compliant?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "An ATS-compliant resume uses clean headings, standard font hierarchies, single-column structures, and plain bullet points so Applicant Tracking Systems can easily parse your experience."
-          }
-        }
-      ]
-    }
-    </script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- html2pdf Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
-   <style>
-    .a4-page {
-        width: 100%;
-        max-width: 210mm;
-        min-height: 297mm;
-        padding: 10mm 12mm;
-        background: white;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-        letter-spacing: normal;
-        word-spacing: normal;
-        -webkit-font-smoothing: antialiased;
-        overflow: visible; /* Allows content to flow naturally across pages */
-        display: block;    /* Removes flex constraints that trap height */
-        margin: 0 auto;
-    }
+    <style>
+        .a4-page {
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            padding: 12mm 15mm;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            letter-spacing: normal;
+            word-spacing: normal;
+            -webkit-font-smoothing: antialiased;
+            overflow: visible;
+            display: block;
+            margin: 0 auto;
+        }
 
-    #resume-preview * {
-        box-sizing: border-box;
-        max-width: 100%;
-        word-break: break-word;
-    }
-</style>
-        
+        #resume-preview * {
+            box-sizing: border-box;
+            max-width: 100%;
+            word-break: break-word;
+        }
+
+        .resume-section {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+    </style>
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
@@ -107,17 +60,28 @@
                 <h1 class="text-2xl font-bold tracking-wide">Free ATS Resume Builder</h1>
                 <p class="text-xs text-slate-400 mt-1">Create professional A4 PDF resumes that expand seamlessly across pages.</p>
             </div>
-            <!-- এখানে শেয়ার এবং ডাউনলোড বাটন একসাথে ফ্লেক্স বক্সের ভেতরে রাখা হলো -->
             <div class="flex items-center gap-2">
-                <button type="button" onclick="shareResume()" class="bg-slate-700 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs md:text-sm">
+                <button type="button" onclick="shareResume()" class="bg-slate-700 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs md:text-sm cursor-pointer">
                     Share CV
                 </button>
-                <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition text-xs md:text-sm">
+                <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition text-xs md:text-sm cursor-pointer">
                     Download A4 PDF (100% Free)
                 </button>
             </div>
         </div>
     </header>
+
+    <!-- Profession Quick Switcher Bar -->
+    <div class="bg-white border-b border-slate-200 py-3 px-6 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mr-2">Quick Demo Profiles:</span>
+            <button type="button" onclick="loadProfession('software')" class="px-3 py-1 text-xs font-semibold bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition cursor-pointer">Software Engineer</button>
+            <button type="button" onclick="loadProfession('hr')" class="px-3 py-1 text-xs font-semibold bg-slate-100 text-slate-700 rounded-full hover:bg-slate-200 transition cursor-pointer">HR Assistant</button>
+            <button type="button" onclick="loadProfession('data')" class="px-3 py-1 text-xs font-semibold bg-slate-100 text-slate-700 rounded-full hover:bg-slate-200 transition cursor-pointer">Data Analyst</button>
+            <button type="button" onclick="loadProfession('marketing')" class="px-3 py-1 text-xs font-semibold bg-slate-100 text-slate-700 rounded-full hover:bg-slate-200 transition cursor-pointer">Digital Marketer</button>
+            <button type="button" onclick="loadProfession('designer')" class="px-3 py-1 text-xs font-semibold bg-slate-100 text-slate-700 rounded-full hover:bg-slate-200 transition cursor-pointer">Graphic Designer</button>
+        </div>
+    </div>
 
     <!-- Main Builder Container -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -196,11 +160,11 @@
                     <div id="step-3" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">3. Work Experience</h3>
-                            <button type="button" onclick="addExperience()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Job</button>
+                            <button type="button" onclick="addExperience()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold cursor-pointer">+ Add Job</button>
                         </div>
                         <div id="experience-container" class="space-y-4">
                             <div class="p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative">
-                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
                                 <div class="grid grid-cols-2 gap-2">
                                     <input type="text" placeholder="Company" value="Apex Cloud Technologies" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
                                     <input type="text" placeholder="Role" value="Senior Engineer" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
@@ -215,11 +179,11 @@
                     <div id="step-4" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">4. Key Projects</h3>
-                            <button type="button" onclick="addProject()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Project</button>
+                            <button type="button" onclick="addProject()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold cursor-pointer">+ Add Project</button>
                         </div>
                         <div id="project-container" class="space-y-4">
                             <div class="p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative">
-                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
                                 <input type="text" placeholder="Project Name" value="CloudScale Dashboard" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
                                 <input type="text" placeholder="Technologies" value="React, Node.js, Docker" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
                                 <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc">Built a real-time monitoring tool utilized by over 5,000 developers.</textarea>
@@ -231,11 +195,11 @@
                     <div id="step-5" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">5. Education</h3>
-                            <button type="button" onclick="addEducation()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Degree</button>
+                            <button type="button" onclick="addEducation()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold cursor-pointer">+ Add Degree</button>
                         </div>
                         <div id="education-container" class="space-y-4">
                             <div class="p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative">
-                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
                                 <div class="grid grid-cols-2 gap-2">
                                     <input type="text" placeholder="Degree" value="B.S. in Computer Science" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
                                     <input type="text" placeholder="Institution" value="UC Berkeley" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
@@ -262,7 +226,7 @@
                     <div id="step-7" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
                             <h3 class="text-sm font-bold text-slate-900 uppercase">7. Professional References</h3>
-                            <button type="button" onclick="addReference()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold">+ Add Reference</button>
+                            <button type="button" onclick="addReference()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold cursor-pointer">+ Add Reference</button>
                         </div>
                         <div id="reference-container" class="space-y-4"></div>
                     </div>
@@ -271,7 +235,7 @@
                 <!-- Navigation Controls -->
                 <div class="flex justify-between pt-4 border-t border-slate-200 mt-6">
                     <button type="button" id="prev-btn" onclick="changeStep(-1)" class="bg-slate-200 text-slate-700 px-4 py-2 rounded text-xs font-semibold opacity-50 cursor-not-allowed" disabled>Previous</button>
-                    <button type="button" id="next-btn" onclick="changeStep(1)" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-semibold">Next Step</button>
+                    <button type="button" id="next-btn" onclick="changeStep(1)" class="bg-indigo-600 text-white px-4 py-2 rounded text-xs font-semibold cursor-pointer">Next Step</button>
                 </div>
 
             </div>
@@ -284,59 +248,59 @@
 
         <!-- RIGHT: Live A4 Preview Pane -->
         <div class="w-full bg-slate-200 flex flex-col items-center justify-start overflow-x-auto p-4 rounded-xl">
-            <div id="resume-preview" class="a4-page text-slate-900 text-[8pt] leading-tight">
+            <div id="resume-preview" class="a4-page text-slate-900 text-[8.5pt] leading-snug">
                 <div>
-                    <div id="preview-header-wrap" class="w-full text-center border-b border-slate-300 pb-2 mb-2">
-                        <div id="preview-img-container" class="hidden mx-auto mb-1 w-11 h-11">
-                            <img id="preview-image" src="" alt="Photo" class="w-11 h-11 rounded-none object-cover border border-slate-300 mx-auto">
+                    <div id="preview-header-wrap" class="w-full text-center border-b border-slate-300 pb-3 mb-3">
+                        <div id="preview-img-container" class="hidden mx-auto mb-2 w-12 h-12">
+                            <img id="preview-image" src="" alt="Photo" class="w-12 h-12 rounded-none object-cover border border-slate-300 mx-auto">
                         </div>
-                        <h1 id="preview-name" class="text-sm font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
-                        <p id="preview-title" class="text-[8.5pt] font-semibold text-indigo-700 mt-0.5">Senior Full Stack Software Engineer</p>
-                        <p id="preview-contact" class="text-[7.5pt] text-slate-600 mt-1 w-full block">
+                        <h1 id="preview-name" class="text-base font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
+                        <p id="preview-title" class="text-[9pt] font-semibold text-indigo-700 mt-0.5">Senior Full Stack Software Engineer</p>
+                        <p id="preview-contact" class="text-[7.5pt] text-slate-600 mt-1.5 w-full block">
                             alex.morgan@email.com &bull; +1 (555) 382-9102 &bull; San Francisco, CA &bull; linkedin.com/in/alexmorgan
                         </p>
                     </div>
 
                     <!-- Summary -->
-                    <div class="mt-3 mb-2">
-                        <h3 id="heading-summary" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1">Professional Summary</h3>
-                        <p id="preview-summary" class="text-[8pt] text-slate-700">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</p>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-summary" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional Summary</h3>
+                        <p id="preview-summary" class="text-[8.5pt] text-slate-700 leading-normal">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</p>
                     </div>
 
                     <!-- Experience -->
-                    <div class="mt-3 mb-2">
-                        <h3 id="heading-experience" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1">Professional Experience</h3>
-                        <div id="preview-experience" class="space-y-1 text-[8pt]"></div>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-experience" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional Experience</h3>
+                        <div id="preview-experience" class="space-y-2 text-[8.5pt]"></div>
                     </div>
 
                     <!-- Projects -->
-                    <div class="mt-3 mb-2">
-                        <h3 id="heading-projects" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1">Key Projects</h3>
-                        <div id="preview-projects" class="space-y-1 text-[8pt]"></div>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-projects" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Key Projects</h3>
+                        <div id="preview-projects" class="space-y-2 text-[8.5pt]"></div>
                     </div>
 
                     <!-- Education -->
-                    <div class="mt-3 mb-2">
-                        <h3 id="heading-education" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1">Education</h3>
-                        <div id="preview-education" class="space-y-1 text-[8pt]"></div>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-education" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Education</h3>
+                        <div id="preview-education" class="space-y-1.5 text-[8.5pt]"></div>
                     </div>
 
                     <!-- Certifications -->
-                    <div class="mt-3 mb-2">
-                        <h3 id="heading-certs" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1">Certifications</h3>
-                        <p id="preview-certs" class="text-[8pt] text-slate-700">AWS Certified Solutions Architect, Certified Kubernetes Administrator</p>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-certs" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Certifications</h3>
+                        <p id="preview-certs" class="text-[8.5pt] text-slate-700">AWS Certified Solutions Architect, Certified Kubernetes Administrator</p>
                     </div>
 
                     <!-- Skills -->
-                    <div class="mt-3 mb-2">
-                        <h3 id="heading-skills" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1">Technical Skills</h3>
-                        <p id="preview-skills" class="text-[8pt] text-slate-700">JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS</p>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-skills" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Technical Skills</h3>
+                        <p id="preview-skills" class="text-[8.5pt] text-slate-700">JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS</p>
                     </div>
 
                     <!-- References -->
-                    <div id="preview-references-section" class="mt-3 mb-1 hidden">
-                        <h3 id="heading-refs" class="text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1">Professional References</h3>
-                        <div id="preview-references" class="grid grid-cols-2 gap-1 text-[7.5pt]"></div>
+                    <div id="preview-references-section" class="resume-section mt-4 mb-2 hidden">
+                        <h3 id="heading-refs" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional References</h3>
+                        <div id="preview-references" class="grid grid-cols-2 gap-2 text-[8pt]"></div>
                     </div>
                 </div>
             </div>
@@ -358,7 +322,7 @@
             </div>
             <div class="p-4 border rounded-lg bg-slate-50">
                 <div class="text-indigo-600 font-bold text-lg mb-1">2. Select Your Style</div>
-                <p class="text-xs text-slate-600">Choose between Classic, Modern, Minimalist, Executive, or Emerald formatting styles that maintain strict A4 single-page proportions.</p>
+                <p class="text-xs text-slate-600">Choose between Classic, Modern, Minimalist, Executive, or Emerald formatting styles that maintain professional proportions.</p>
             </div>
             <div class="p-4 border rounded-lg bg-slate-50">
                 <div class="text-indigo-600 font-bold text-lg mb-1">3. Download Crisp PDF</div>
@@ -371,7 +335,7 @@
             <h3 class="text-xl font-bold text-slate-900 mb-4 border-b pb-2">Frequently Asked Questions</h3>
             <div>
                 <h4 class="font-semibold text-slate-800 text-sm mb-1">Is this ATS Resume Builder completely free?</h4>
-                <p class="text-xs text-slate-600">Yes, our resume builder is 100% free forever. You can create, preview, and download unlimited single-page A4 PDF resumes without any hidden fees, subscriptions, or watermarks.</p>
+                <p class="text-xs text-slate-600">Yes, our resume builder is 100% free forever. You can create, preview, and download unlimited professional A4 PDF resumes without any hidden fees, subscriptions, or watermarks.</p>
             </div>
             <div>
                 <h4 class="font-semibold text-slate-800 text-sm mb-1">Is my personal data stored on a server?</h4>
@@ -379,7 +343,7 @@
             </div>
             <div>
                 <h4 class="font-semibold text-slate-800 text-sm mb-1">What makes a resume ATS-compliant?</h4>
-                <p class="text-xs text-slate-600">An ATS-compliant resume uses standard font hierarchies, single-column structures, clear section headings, and plain text formatting so Applicant Tracking Systems can easily parse your application.</p>
+                <p class="text-xs text-slate-600">An ATS-compliant resume uses standard font hierarchies, structured sections, clear headings, and plain text formatting so Applicant Tracking Systems can easily parse your application.</p>
             </div>
         </div>
     </section>
@@ -399,12 +363,178 @@
             <a href="privacy.html" class="hover:underline text-slate-500">Privacy Policy</a>
         </div>
 
-        <p class="text-slate-400">&copy; 2026 Free ATS Resume Builder. Single-page A4 PDF resumes with zero sign-up required.</p>
+        <p class="text-slate-400">&copy; 2026 Free ATS Resume Builder. Professional A4 PDF resumes with zero sign-up required.</p>
     </footer>
 
     <script>
         let currentStep = 1;
         const totalSteps = 7;
+
+        // Profession Presets Data for Quick Switching Demo
+        const professions = {
+            software: {
+                name: "Alex Morgan",
+                title: "Senior Full Stack Software Engineer",
+                email: "alex.morgan@email.com",
+                phone: "+1 (555) 382-9102",
+                location: "San Francisco, CA",
+                links: "linkedin.com/in/alexmorgan",
+                summary: "Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.",
+                certs: "AWS Certified Solutions Architect, Certified Kubernetes Administrator",
+                skills: "JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS",
+                exp: [
+                    { company: "Apex Cloud Technologies", role: "Senior Engineer", dates: "Jan 2022 — Present", desc: "Architected microservices using Node.js and AWS, reducing latency by 35%." }
+                ],
+                proj: [
+                    { name: "CloudScale Dashboard", tech: "React, Node.js, Docker", desc: "Built a real-time monitoring tool utilized by over 5,000 developers." }
+                ],
+                edu: [
+                    { degree: "B.S. in Computer Science", uni: "UC Berkeley", year: "2019" }
+                ]
+            },
+            hr: {
+                name: "Sarah Jenkins",
+                title: "HR Assistant & Talent Acquisition Specialist",
+                email: "sarah.jenkins@email.com",
+                phone: "+1 (555) 421-8890",
+                location: "New York, NY",
+                links: "linkedin.com/in/sarahjenkins",
+                summary: "Detail-oriented HR Assistant with 4+ years of expertise in full-cycle recruiting, employee onboarding, and HRIS database management. Adept at improving candidate pipelines and fostering positive workplace cultures.",
+                certs: "SHRM-CP Certified, Professional in Human Resources (PHR)",
+                skills: "Talent Acquisition, Workday HRIS, Employee Relations, Onboarding, Payroll Coordination",
+                exp: [
+                    { company: "Global Horizons Corp", role: "HR Assistant", dates: "Mar 2021 — Present", desc: "Managed end-to-end recruitment for 150+ open roles, reducing time-to-hire by 25%." }
+                ],
+                proj: [
+                    { name: "Digital Onboarding Portal", tech: "Workday, Notion", desc: "Streamlined paperwork workflow for new hires, cutting setup time from 3 days to 4 hours." }
+                ],
+                edu: [
+                    { degree: "B.A. in Business Administration", uni: "NYU Stern", year: "2020" }
+                ]
+            },
+            data: {
+                name: "David Chen",
+                title: "Senior Data Analyst",
+                email: "david.chen@email.com",
+                phone: "+1 (555) 789-2341",
+                location: "Seattle, WA",
+                links: "linkedin.com/in/davidchen-data",
+                summary: "Analytical Data Analyst with 5+ years of experience turning complex datasets into actionable business insights using SQL, Python, and Tableau. Proven ability to optimize pricing strategies and customer retention models.",
+                certs: "Google Data Analytics Professional Certificate, Tableau Desktop Specialist",
+                skills: "SQL, Python, Tableau, Power BI, Pandas, NumPy, Statistical Modeling",
+                exp: [
+                    { company: "Vanguard Analytics", role: "Data Analyst", dates: "Jun 2021 — Present", desc: "Developed automated executive dashboards in Tableau, saving 15 hours of manual reporting per week." }
+                ],
+                proj: [
+                    { name: "Customer Churn Predictor", tech: "Python, Scikit-Learn", desc: "Built a machine learning model that identified churn risks with 89% accuracy." }
+                ],
+                edu: [
+                    { degree: "B.S. in Statistics", uni: "University of Washington", year: "2021" }
+                ]
+            },
+            marketing: {
+                name: "Jessica Taylor",
+                title: "Digital Marketing Specialist",
+                email: "jessica.taylor@email.com",
+                phone: "+1 (555) 612-9933",
+                location: "Austin, TX",
+                links: "linkedin.com/in/jessicataylor-mkt",
+                summary: "Results-driven Digital Marketer skilled in SEO, PPC campaigns, and content strategy with a proven ability to scale brand awareness and drive customer acquisition by over 50%.",
+                certs: "Google Ads Certified, HubSpot Inbound Marketing",
+                skills: "SEO, Google Analytics, SEMrush, Meta Ads Manager, Content Strategy, Email Marketing",
+                exp: [
+                    { company: "BrandPulse Media", role: "Growth Marketer", dates: "Feb 2022 — Present", desc: "Managed $50k monthly ad spend across Google and Meta platforms, achieving a 3.8x ROAS." }
+                ],
+                proj: [
+                    { name: "E-Commerce SEO Overhaul", tech: "SEMrush, WordPress", desc: "Boosted organic search traffic by 120% over 6 months through keyword optimization." }
+                ],
+                edu: [
+                    { degree: "B.A. in Marketing", uni: "University of Texas at Austin", year: "2020" }
+                ]
+            },
+            designer: {
+                name: "Liam O'Connor",
+                title: "UI/UX & Graphic Designer",
+                email: "liam.oconnor@email.com",
+                phone: "+1 (555) 901-4422",
+                location: "Los Angeles, CA",
+                links: "behance.net/liamoconnor",
+                summary: "Creative UI/UX and Graphic Designer with 6+ years of experience designing intuitive mobile applications, corporate branding kits, and high-conversion web interfaces.",
+                certs: "Adobe Certified Expert, Nielsen Norman UX Master Certification",
+                skills: "Figma, Adobe XD, Photoshop, Illustrator, Prototyping, Wireframing, Design Systems",
+                exp: [
+                    { company: "PixelCraft Studio", role: "Lead UI/UX Designer", dates: "Jan 2020 — Present", desc: "Redesigned flagship SaaS mobile app, resulting in a 45% increase in user engagement." }
+                ],
+                proj: [
+                    { name: "Fintech Mobile Design System", tech: "Figma, Auto Layout", desc: "Created comprehensive component library used by 12 cross-functional product teams." }
+                ],
+                edu: [
+                    { degree: "B.F.A. in Graphic Design", uni: "ArtCenter College of Design", year: "2018" }
+                ]
+            }
+        };
+
+        function loadProfession(key) {
+            const prof = professions[key];
+            if (!prof) return;
+
+            // Fill form inputs
+            document.getElementById('input-name').value = prof.name;
+            document.getElementById('input-title').value = prof.title;
+            document.getElementById('input-email').value = prof.email;
+            document.getElementById('input-phone').value = prof.phone;
+            document.getElementById('input-location').value = prof.location;
+            document.getElementById('input-links').value = prof.links;
+            document.getElementById('input-summary').value = prof.summary;
+            document.getElementById('input-certs').value = prof.certs;
+            document.getElementById('input-skills').value = prof.skills;
+
+            // Fill Experience
+            const expCont = document.getElementById('experience-container');
+            expCont.innerHTML = '';
+            prof.exp.forEach(item => {
+                expCont.innerHTML += `
+                    <div class="p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative">
+                        <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" placeholder="Company" value="${item.company}" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
+                            <input type="text" placeholder="Role" value="${item.role}" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
+                        </div>
+                        <input type="text" placeholder="Dates" value="${item.dates}" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded exp-dates">
+                        <textarea placeholder="Accomplishments..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded exp-desc">${item.desc}</textarea>
+                    </div>`;
+            });
+
+            // Fill Projects
+            const projCont = document.getElementById('project-container');
+            projCont.innerHTML = '';
+            prof.proj.forEach(item => {
+                projCont.innerHTML += `
+                    <div class="p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative">
+                        <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
+                        <input type="text" placeholder="Project Name" value="${item.name}" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
+                        <input type="text" placeholder="Technologies" value="${item.tech}" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
+                        <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc">${item.desc}</textarea>
+                    </div>`;
+            });
+
+            // Fill Education
+            const eduCont = document.getElementById('education-container');
+            eduCont.innerHTML = '';
+            prof.edu.forEach(item => {
+                eduCont.innerHTML += `
+                    <div class="p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative">
+                        <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" placeholder="Degree" value="${item.degree}" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
+                            <input type="text" placeholder="Institution" value="${item.uni}" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
+                        </div>
+                        <input type="text" placeholder="Year" value="${item.year}" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded edu-year">
+                    </div>`;
+            });
+
+            updateResume();
+        }
 
         function setStep(step) {
             currentStep = step;
@@ -473,7 +603,7 @@
             const div = document.createElement('div');
             div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 exp-item relative';
             div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
                 <div class="grid grid-cols-2 gap-2">
                     <input type="text" placeholder="Company" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
                     <input type="text" placeholder="Role" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
@@ -491,7 +621,7 @@
             const div = document.createElement('div');
             div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative';
             div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
                 <input type="text" placeholder="Project Name" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
                 <input type="text" placeholder="Technologies" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
                 <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc"></textarea>
@@ -506,7 +636,7 @@
             const div = document.createElement('div');
             div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative';
             div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
                 <div class="grid grid-cols-2 gap-2">
                     <input type="text" placeholder="Degree" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
                     <input type="text" placeholder="Institution" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
@@ -523,7 +653,7 @@
             const div = document.createElement('div');
             div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 ref-item relative';
             div.innerHTML = `
-                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold">✕</button>
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
                 <div class="grid grid-cols-2 gap-2">
                     <input type="text" placeholder="Name" oninput="updateResume()" class="p-1.5 text-xs border rounded ref-name">
                     <input type="text" placeholder="Title & Company" oninput="updateResume()" class="p-1.5 text-xs border rounded ref-title">
@@ -576,48 +706,48 @@
                 if (previewRoot && headerWrap) {
                     if (template === 'executive') {
                         previewRoot.style.fontFamily = 'Calibri, Arial, sans-serif';
-                        headerWrap.className = "w-full text-center border-b-2 border-slate-900 pb-2 mb-2 bg-slate-900 text-white p-3 rounded";
-                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wider text-white";
-                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-amber-400 mt-0.5";
-                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-300 mt-1 w-full block";
+                        headerWrap.className = "w-full text-center border-b-2 border-slate-900 pb-3 mb-3 bg-slate-900 text-white p-4 rounded";
+                        if (nameEl) nameEl.className = "text-lg font-bold uppercase tracking-wider text-white";
+                        if (titleEl) titleEl.className = "text-[9.5pt] font-semibold text-amber-400 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-300 mt-1.5 w-full block";
                         hHeadings.forEach(h => {
-                            h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-900 border-b-2 border-slate-900 pb-0.5 mb-1";
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-slate-900 border-b-2 border-slate-900 pb-1 mb-1.5";
                         });
                     } else if (template === 'emerald') {
                         previewRoot.style.fontFamily = 'Trebuchet MS, sans-serif';
-                        headerWrap.className = "w-full text-center border-b-2 border-emerald-600 pb-2 mb-2 bg-emerald-50 p-2 rounded";
-                        if (nameEl) nameEl.className = "text-sm font-bold uppercase tracking-wide text-emerald-900";
-                        if (titleEl) titleEl.className = "text-[8.5pt] font-semibold text-emerald-700 mt-0.5";
-                        if (contactEl) contactEl.className = "text-[7.5pt] text-emerald-800 mt-1 w-full block";
+                        headerWrap.className = "w-full text-center border-b-2 border-emerald-600 pb-3 mb-3 bg-emerald-50 p-3 rounded";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-emerald-900";
+                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-emerald-700 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-emerald-800 mt-1.5 w-full block";
                         hHeadings.forEach(h => {
-                            h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-emerald-700 border-b border-emerald-300 pb-0.5 mb-1";
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-emerald-700 border-b border-emerald-300 pb-1 mb-1.5";
                         });
                     } else if (template === 'modern') {
                         previewRoot.style.fontFamily = 'Arial, sans-serif';
-                        headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-2 mb-2 bg-indigo-50/50 p-2 rounded";
-                        if (nameEl) nameEl.className = "text-sm font-bold uppercase tracking-wide text-slate-900";
-                        if (titleEl) titleEl.className = "text-[8.5pt] font-semibold text-indigo-700 mt-0.5";
-                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1 w-full block";
+                        headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-3 mb-3 bg-indigo-50/50 p-3 rounded";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-slate-900";
+                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-indigo-700 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1.5 w-full block";
                         hHeadings.forEach(h => {
-                            h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-0.5 mb-1";
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-1 mb-1.5";
                         });
                     } else if (template === 'minimal') {
                         previewRoot.style.fontFamily = 'Georgia, serif';
-                        headerWrap.className = "w-full text-center border-b border-zinc-400 pb-2 mb-2";
-                        if (nameEl) nameEl.className = "text-sm font-bold uppercase tracking-wide text-zinc-900";
-                        if (titleEl) titleEl.className = "text-[8.5pt] font-semibold text-zinc-700 mt-0.5";
-                        if (contactEl) contactEl.className = "text-[7.5pt] text-zinc-600 mt-1 w-full block";
+                        headerWrap.className = "w-full text-center border-b border-zinc-400 pb-3 mb-3";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-zinc-900";
+                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-zinc-700 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-zinc-600 mt-1.5 w-full block";
                         hHeadings.forEach(h => {
-                            h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-0.5 mb-1";
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-1 mb-1.5";
                         });
                     } else {
                         previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
-                        headerWrap.className = "w-full text-center border-b border-slate-300 pb-2 mb-2";
-                        if (nameEl) nameEl.className = "text-sm font-bold uppercase tracking-wide text-slate-900";
-                        if (titleEl) titleEl.className = "text-[8.5pt] font-semibold text-indigo-700 mt-0.5";
-                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1 w-full block";
+                        headerWrap.className = "w-full text-center border-b border-slate-300 pb-3 mb-3";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-slate-900";
+                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-indigo-700 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1.5 w-full block";
                         hHeadings.forEach(h => {
-                            h.className = "text-[7.5pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-0.5 mb-1";
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5";
                         });
                     }
                 }
@@ -633,12 +763,12 @@
                         const desc = item.querySelector('.exp-desc')?.value || '';
                         if (company || role || desc) {
                             expContainer.innerHTML += `
-                                <div>
+                                <div class="mb-2">
                                     <div class="flex justify-between font-semibold text-slate-900">
                                         <span>${role}${role && company ? ' — ' : ''}${company}</span>
                                         <span>${dates}</span>
                                     </div>
-                                    <p class="text-slate-700">&bull; ${desc}</p>
+                                    <p class="text-slate-700 mt-0.5">&bull; ${desc}</p>
                                 </div>`;
                         }
                     });
@@ -654,11 +784,11 @@
                         const desc = item.querySelector('.proj-desc')?.value || '';
                         if (name || desc) {
                             projContainer.innerHTML += `
-                                <div>
+                                <div class="mb-2">
                                     <div class="flex justify-between font-semibold text-slate-900">
                                         <span>${name} ${tech ? `<span class="font-normal text-slate-600">(${tech})</span>` : ''}</span>
                                     </div>
-                                    <p class="text-slate-700">&bull; ${desc}</p>
+                                    <p class="text-slate-700 mt-0.5">&bull; ${desc}</p>
                                 </div>`;
                         }
                     });
@@ -674,7 +804,7 @@
                         const year = item.querySelector('.edu-year')?.value || '';
                         if (degree || uni) {
                             eduContainer.innerHTML += `
-                                <div class="flex justify-between font-semibold text-slate-900">
+                                <div class="flex justify-between font-semibold text-slate-900 mb-1">
                                     <span>${degree}${degree && uni ? ' — ' : ''}${uni}</span>
                                     <span class="font-normal text-slate-600">${year}</span>
                                 </div>`;
@@ -711,23 +841,6 @@
             }
         }
 
-        // Initial render call on page load
-        document.addEventListener("DOMContentLoaded", () => {
-            updateResume();
-        });
-
-      function downloadPDF() {
-    const element = document.getElementById('resume-preview');
-    const options = {
-        margin:       [10, 11, 10, 10], // top, left, bottom, right margins in mm
-        filename:     'your_cv_builder.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['css', 'legacy'] }
-    };
-    html2pdf().from(element).set(options).save();
-}
         function shareResume() {
             if (navigator.share) {
                 navigator.share({
@@ -742,7 +855,24 @@
                 alert('Resume link copied to clipboard!');
             }
         }
-    
+
+        // Initial render call on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            updateResume();
+        });
+
+        function downloadPDF() {
+            const element = document.getElementById('resume-preview');
+            const options = {
+                margin:       [10, 10, 10, 10],
+                filename:     'Professional_Resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:    { mode: ['css', 'legacy'] }
+            };
+            html2pdf().from(element).set(options).save();
+        }
     </script>
 </body>
 </html>
