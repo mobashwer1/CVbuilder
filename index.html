@@ -105,11 +105,17 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h1 class="text-2xl font-bold tracking-wide">Free ATS Resume Builder</h1>
-                <p class="text-xs text-slate-400 mt-1">Create single-page A4 PDF resumes with zero login, paywalls, or watermarks.</p>
+                <p class="text-xs text-slate-400 mt-1">Create professional A4 PDF resumes that expand seamlessly across pages.</p>
             </div>
-            <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition">
-                Download A4 PDF (100% Free)
-            </button>
+            <!-- এখানে শেয়ার এবং ডাউনলোড বাটন একসাথে ফ্লেক্স বক্সের ভেতরে রাখা হলো -->
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="shareResume()" class="bg-slate-700 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs md:text-sm">
+                    Share CV
+                </button>
+                <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition text-xs md:text-sm">
+                    Download A4 PDF (100% Free)
+                </button>
+            </div>
         </div>
     </header>
 
@@ -722,6 +728,20 @@
     };
     html2pdf().from(element).set(options).save();
 }
+        function shareResume() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My ATS Resume',
+                    text: 'Check out the professional resume I created using this free ATS Resume Builder!',
+                    url: window.location.href,
+                })
+                .then(() => console.log('Successfully shared'))
+                .catch((error) => console.log('Error sharing:', error));
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Resume link copied to clipboard!');
+            }
+        }
     
     </script>
 </body>
