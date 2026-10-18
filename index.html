@@ -478,7 +478,6 @@
             const prof = professions[key];
             if (!prof) return;
 
-            // Fill form inputs
             document.getElementById('input-name').value = prof.name;
             document.getElementById('input-title').value = prof.title;
             document.getElementById('input-email').value = prof.email;
@@ -489,7 +488,6 @@
             document.getElementById('input-certs').value = prof.certs;
             document.getElementById('input-skills').value = prof.skills;
 
-            // Fill Experience
             const expCont = document.getElementById('experience-container');
             expCont.innerHTML = '';
             prof.exp.forEach(item => {
@@ -505,7 +503,6 @@
                     </div>`;
             });
 
-            // Fill Projects
             const projCont = document.getElementById('project-container');
             projCont.innerHTML = '';
             prof.proj.forEach(item => {
@@ -518,7 +515,6 @@
                     </div>`;
             });
 
-            // Fill Education
             const eduCont = document.getElementById('education-container');
             eduCont.innerHTML = '';
             prof.edu.forEach(item => {
@@ -678,7 +674,6 @@
             try {
                 const template = safeVal('input-template') || 'classic';
                 
-                // Header Info
                 safeSetText('preview-name', safeVal('input-name') || 'Alex Morgan');
                 safeSetText('preview-title', safeVal('input-title') || 'Senior Full Stack Software Engineer');
                 
@@ -690,12 +685,10 @@
                 ].filter(Boolean);
                 safeSetText('preview-contact', contactParts.join(' • '));
 
-                // Summary & Skills
                 safeSetText('preview-summary', safeVal('input-summary'));
                 safeSetText('preview-certs', safeVal('input-certs'));
                 safeSetText('preview-skills', safeVal('input-skills'));
 
-                // Dynamic Template Styles
                 const headerWrap = document.getElementById('preview-header-wrap');
                 const previewRoot = document.getElementById('resume-preview');
                 const hHeadings = document.querySelectorAll('#resume-preview h3');
@@ -752,7 +745,6 @@
                     }
                 }
 
-                // Experience Loop
                 const expContainer = document.getElementById('preview-experience');
                 if (expContainer) {
                     expContainer.innerHTML = '';
@@ -774,7 +766,6 @@
                     });
                 }
 
-                // Projects Loop
                 const projContainer = document.getElementById('preview-projects');
                 if (projContainer) {
                     projContainer.innerHTML = '';
@@ -794,7 +785,6 @@
                     });
                 }
 
-                // Education Loop
                 const eduContainer = document.getElementById('preview-education');
                 if (eduContainer) {
                     eduContainer.innerHTML = '';
@@ -812,7 +802,6 @@
                     });
                 }
 
-                // References Loop
                 const refContainer = document.getElementById('preview-references');
                 const refSection = document.getElementById('preview-references-section');
                 const refItems = document.querySelectorAll('.ref-item');
@@ -856,7 +845,6 @@
             }
         }
 
-        // Initial render call on page load
         document.addEventListener("DOMContentLoaded", () => {
             updateResume();
         });
