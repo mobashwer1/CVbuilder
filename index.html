@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free ATS Resume & Cover Letter Builder - Create Professional A4 PDFs</title>
+    <title>Free ATS Resume & Cover Letter Builder - Create Professional A4 Resumes</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Build an ATS-optimized professional resume and cover letter online for free. Download clean, single or multi-page A4 PDF resumes instantly with zero registration or watermarks.">
-    <meta name="keywords" content="free ATS resume builder, cover letter generator, A4 resume maker, professional CV builder, ATS cover letter template">
+    <meta name="description" content="Build an ATS-optimized professional resume online for free. Download clean, single or multi-page A4 PDF resumes instantly with zero registration or watermarks.">
+    <meta name="keywords" content="free ATS resume builder, A4 resume generator, professional CV maker, ATS compliant resume templates, free PDF resume, cover letter generator">
     <meta name="robots" content="index, follow">
 
     <!-- OpenGraph / Social Previews -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Free ATS Resume Builder - Create Professional A4 Resumes">
+    <meta property="og:title" content="Free ATS Resume & Cover Letter Builder - Create Professional A4 Resumes">
     <meta property="og:description" content="Build an ATS-optimized professional resume online for free. Clean layouts, instant live preview, zero sign-up required.">
     <meta property="og:url" content="https://yourcvbuilder.vercel.app">
 
@@ -25,8 +25,8 @@
         .a4-page {
             width: 100%;
             max-width: 210mm;
-            min-height: 280mm;
-            padding: 15mm 18mm;
+            min-height: 297mm;
+            padding: 12mm 15mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
@@ -34,7 +34,7 @@
             letter-spacing: normal;
             word-spacing: normal;
             -webkit-font-smoothing: antialiased;
-            overflow: hidden;
+            overflow: visible;
             display: block;
             margin: 0 auto;
         }
@@ -58,18 +58,22 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
                 <h1 class="text-2xl font-bold tracking-wide">Free ATS Resume & Cover Letter Builder</h1>
-                <p class="text-xs text-slate-400 mt-1">Create professional A4 PDF resumes and cover letters that expand seamlessly across pages.</p>
+                <p class="text-xs text-slate-400 mt-1">Create professional A4 PDF resumes and cover letters that expand seamlessly.</p>
             </div>
             <div class="flex items-center flex-wrap gap-2">
-                <button type="button" onclick="toggleDocType('resume')" id="btn-toggle-resume" class="bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs transition cursor-pointer">Resume Mode</button>
-                <button type="button" onclick="toggleDocType('cover')" id="btn-toggle-cover" class="bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs hover:bg-slate-800 transition cursor-pointer">Cover Letter Mode</button>
-                <button type="button" onclick="shareResume()" class="bg-slate-700 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs md:text-sm cursor-pointer">
+                <button type="button" onclick="toggleDocType('resume')" id="btn-toggle-resume" class="bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold shadow text-xs transition cursor-pointer">
+                    Resume Mode
+                </button>
+                <button type="button" onclick="toggleDocType('cover')" id="btn-toggle-cover" class="bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs cursor-pointer">
+                    Cover Letter Mode
+                </button>
+                <button type="button" onclick="shareResume()" class="bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs cursor-pointer">
                     Share CV
                 </button>
-                <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition text-xs md:text-sm cursor-pointer">
+                <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition text-xs cursor-pointer">
                     Download A4 PDF
                 </button>
-                <a href="https://mobashwer.gumroad.com/l/cdfjvs" target="_blank" class="bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-emerald-700 transition text-xs md:text-sm cursor-pointer">
+                <a href="https://mobashwer.gumroad.com/l/cdfjvs" target="_blank" class="bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-emerald-700 transition text-xs cursor-pointer">
                     Get Source Code ($3)
                 </a>
             </div>
@@ -103,8 +107,7 @@
                     <button type="button" onclick="setStep(4)" id="tab-4" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">4. Projects</button>
                     <button type="button" onclick="setStep(5)" id="tab-5" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">5. Education</button>
                     <button type="button" onclick="setStep(6)" id="tab-6" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">6. Skills & Certs</button>
-                    <button type="button" onclick="setStep(7)" id="tab-7" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">7. Cover Letter</button>
-                    <button type="button" onclick="setStep(8)" id="tab-8" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">8. References</button>
+                    <button type="button" onclick="setStep(7)" id="tab-7" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">7. Cover Letter / Refs</button>
                 </div>
 
                 <!-- Form Content -->
@@ -116,17 +119,17 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">Color Theme Accent</label>
-                                <select id="input-color-theme" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
+                                <select id="input-color-theme" onchange="updateResume()" class="w-full p-2 text-xs border rounded bg-white font-medium text-slate-700">
                                     <option value="indigo">Indigo Accent (Modern Blue)</option>
                                     <option value="emerald">Emerald Green (Fresh & Clean)</option>
                                     <option value="dark">Executive Dark Navy</option>
                                     <option value="crimson">Crimson Red (Bold)</option>
-                                    <option value="slate">Slate Neutral (Minimal Monochromatic)</option>
+                                    <option value="slate">Slate Neutral (Monochromatic)</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 mb-1">Resume Template Style</label>
-                                <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
+                                <select id="input-template" onchange="updateResume()" class="w-full p-2 text-xs border rounded bg-white font-medium text-slate-700">
                                     <option value="classic">Classic Professional (Clean & Structured)</option>
                                     <option value="modern">Modern Split (Indigo Accent Border)</option>
                                     <option value="minimal">Minimalist Clean (Serif Typography)</option>
@@ -232,46 +235,45 @@
                         <h3 class="text-sm font-bold text-slate-900 uppercase">6. Skills & Certifications</h3>
                         <div>
                             <label class="block text-xs font-medium text-slate-600 mb-1">Certifications</label>
-                            <input type="text" id="input-certs" value="AWS Certified Solutions Architect, Certified Kubernetes Administrator" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
+                            <input type="text" id="input-certs" value="AWS Certified Solutions Architect, Certified Kubernetes Administrator" oninput="updateResume()" class="w-full p-2 text-xs border rounded">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-slate-600 mb-1">Technical Skills</label>
-                            <input type="text" id="input-skills" value="JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS" oninput="updateResume()" class="w-full p-2 text-sm border rounded">
+                            <input type="text" id="input-skills" value="JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS" oninput="updateResume()" class="w-full p-2 text-xs border rounded">
                         </div>
                     </div>
 
-                    <!-- STEP 7: COVER LETTER GENERATOR -->
+                    <!-- STEP 7 -->
                     <div id="step-7" class="wizard-step space-y-4 hidden">
-                        <h3 class="text-sm font-bold text-slate-900 uppercase">7. ATS Cover Letter Generator</h3>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <label class="block text-xs font-medium text-slate-600">Hiring Manager Name</label>
-                                <input type="text" id="cl-manager" value="Hiring Manager" oninput="updateResume()" class="mt-1 w-full p-2 text-xs border rounded">
+                        <div class="border-b pb-3 mb-3">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase mb-2">7. ATS Cover Letter Generator</h3>
+                            <div class="grid grid-cols-2 gap-2 mb-2">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600">Hiring Manager Name</label>
+                                    <input type="text" id="cl-manager" value="Hiring Manager" oninput="updateResume()" class="mt-1 w-full p-1.5 text-xs border rounded">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-600">Target Company</label>
+                                    <input type="text" id="cl-company" value="TechCorp Solutions" oninput="updateResume()" class="mt-1 w-full p-1.5 text-xs border rounded">
+                                </div>
                             </div>
                             <div>
-                                <label class="block text-xs font-medium text-slate-600">Target Company Name</label>
-                                <input type="text" id="cl-company" value="TechCorp Solutions" oninput="updateResume()" class="mt-1 w-full p-2 text-xs border rounded">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600">Cover Letter Body</label>
-                            <textarea id="cl-body" rows="8" oninput="updateResume()" class="w-full p-2 text-xs border rounded leading-relaxed">Dear Hiring Manager,
+                                <label class="block text-xs font-medium text-slate-600">Cover Letter Body</label>
+                                <textarea id="cl-body" rows="6" oninput="updateResume()" class="w-full p-2 text-xs border rounded leading-relaxed">Dear Hiring Manager,
 
-I am writing to express my strong interest in the Senior Full Stack Software Engineer position at TechCorp Solutions. With over 7 years of hands-on experience building scalable web applications and cloud architectures, I am confident in my ability to significantly contribute to your engineering team.
+I am writing to express my strong interest in the Senior Full Stack Software Engineer position at TechCorp Solutions. With over 7 years of hands-on experience building scalable web applications and microservices, I am confident in my ability to make an immediate impact on your team.
 
-In my previous roles, I successfully reduced application latency by 35% through microservices architecture and developed tools used by thousands of developers. My core skills in JavaScript, React, Node.js, and AWS align perfectly with your technical stack.
+In my previous roles, I successfully architected microservices reducing latency by 35% and built real-time platforms for thousands of users. My technical skills in React, Node.js, and cloud architecture match your role requirements closely.
 
-Thank you for your time and consideration. I look forward to discussing how my experience and passion for scalable engineering can benefit TechCorp Solutions.
+Thank you for your time and consideration. I look forward to hearing from you.
 
 Sincerely,
 Alex Morgan</textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- STEP 8 -->
-                    <div id="step-8" class="wizard-step space-y-4 hidden">
-                        <div class="flex justify-between items-center">
-                            <h3 class="text-sm font-bold text-slate-900 uppercase">8. Professional References</h3>
+                        <div class="flex justify-between items-center pt-2">
+                            <h3 class="text-sm font-bold text-slate-900 uppercase">Professional References (Optional)</h3>
                             <button type="button" onclick="addReference()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold cursor-pointer">+ Add Reference</button>
                         </div>
                         <div id="reference-container" class="space-y-4"></div>
@@ -292,80 +294,80 @@ Alex Morgan</textarea>
             </div>
         </div>
 
-        <!-- RIGHT: Live A4 Preview Pane -->
+        <!-- RIGHT: Live Preview Pane -->
         <div class="w-full bg-slate-200 flex flex-col items-center justify-start overflow-x-auto p-4 rounded-xl">
             
             <!-- RESUME PREVIEW -->
-            <div id="resume-preview" class="a4-page text-slate-900 text-[9pt] leading-normal">
+            <div id="resume-preview" class="a4-page text-slate-900 text-[8.5pt] leading-snug">
                 <div>
                     <div id="preview-header-wrap" class="w-full text-center border-b border-slate-300 pb-3 mb-3">
                         <div id="preview-img-container" class="hidden mx-auto mb-2 w-12 h-12">
                             <img id="preview-image" src="" alt="Photo" class="w-12 h-12 rounded-none object-cover border border-slate-300 mx-auto">
                         </div>
-                        <h1 id="preview-name" class="text-[14pt] font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
-                        <p id="preview-title" class="text-[9.5pt] font-semibold text-indigo-700 mt-0.5">Senior Full Stack Software Engineer</p>
-                        <p id="preview-contact" class="text-[8pt] text-slate-600 mt-1.5 w-full block">
+                        <h1 id="preview-name" class="text-base font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
+                        <p id="preview-title" class="text-[9pt] font-semibold text-indigo-700 mt-0.5">Senior Full Stack Software Engineer</p>
+                        <p id="preview-contact" class="text-[7.5pt] text-slate-600 mt-1.5 w-full block">
                             alex.morgan@email.com &bull; +1 (555) 382-9102 &bull; San Francisco, CA &bull; linkedin.com/in/alexmorgan
                         </p>
                     </div>
 
                     <!-- Summary -->
-                    <div class="resume-section mt-3 mb-3">
-                        <h3 id="heading-summary" class="text-[9pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional Summary</h3>
-                        <p id="preview-summary" class="text-[9pt] text-slate-700 leading-normal">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</p>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-summary" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional Summary</h3>
+                        <p id="preview-summary" class="text-[8.5pt] text-slate-700 leading-normal">Innovative Senior Full Stack Engineer with 7+ years of experience designing scalable microservices and high-throughput web applications. Proven track record of improving system performance by 40% and leading high-performing engineering teams in agile environments.</p>
                     </div>
 
                     <!-- Experience -->
-                    <div class="resume-section mt-3 mb-3">
-                        <h3 id="heading-experience" class="text-[9pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional Experience</h3>
-                        <div id="preview-experience" class="space-y-2 text-[9pt]"></div>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-experience" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional Experience</h3>
+                        <div id="preview-experience" class="space-y-2 text-[8.5pt]"></div>
                     </div>
 
                     <!-- Projects -->
-                    <div class="resume-section mt-3 mb-3">
-                        <h3 id="heading-projects" class="text-[9pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Key Projects</h3>
-                        <div id="preview-projects" class="space-y-2 text-[9pt]"></div>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-projects" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Key Projects</h3>
+                        <div id="preview-projects" class="space-y-2 text-[8.5pt]"></div>
                     </div>
 
                     <!-- Education -->
-                    <div class="resume-section mt-3 mb-3">
-                        <h3 id="heading-education" class="text-[9pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Education</h3>
-                        <div id="preview-education" class="space-y-1.5 text-[9pt]"></div>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-education" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Education</h3>
+                        <div id="preview-education" class="space-y-1.5 text-[8.5pt]"></div>
                     </div>
 
                     <!-- Certifications -->
-                    <div class="resume-section mt-3 mb-3">
-                        <h3 id="heading-certs" class="text-[9pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Certifications</h3>
-                        <p id="preview-certs" class="text-[9pt] text-slate-700">AWS Certified Solutions Architect, Certified Kubernetes Administrator</p>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-certs" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Certifications</h3>
+                        <p id="preview-certs" class="text-[8.5pt] text-slate-700">AWS Certified Solutions Architect, Certified Kubernetes Administrator</p>
                     </div>
 
                     <!-- Skills -->
-                    <div class="resume-section mt-3 mb-3">
-                        <h3 id="heading-skills" class="text-[9pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Technical Skills</h3>
-                        <p id="preview-skills" class="text-[9pt] text-slate-700">JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS</p>
+                    <div class="resume-section mt-4 mb-3">
+                        <h3 id="heading-skills" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Technical Skills</h3>
+                        <p id="preview-skills" class="text-[8.5pt] text-slate-700">JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, Docker, AWS</p>
                     </div>
 
                     <!-- References -->
-                    <div id="preview-references-section" class="resume-section mt-3 mb-2 hidden">
-                        <h3 id="heading-refs" class="text-[9pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional References</h3>
-                        <div id="preview-references" class="grid grid-cols-2 gap-2 text-[8.5pt]"></div>
+                    <div id="preview-references-section" class="resume-section mt-4 mb-2 hidden">
+                        <h3 id="heading-refs" class="text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5">Professional References</h3>
+                        <div id="preview-references" class="grid grid-cols-2 gap-2 text-[8pt]"></div>
                     </div>
                 </div>
             </div>
 
             <!-- COVER LETTER PREVIEW (Hidden by default) -->
-            <div id="cover-letter-preview" class="a4-page text-slate-900 text-[9.5pt] leading-relaxed hidden">
-                <div class="border-b border-slate-300 pb-3 mb-5">
-                    <h1 id="cl-preview-name" class="text-[14pt] font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
-                    <p id="cl-preview-title" class="text-[9.5pt] font-semibold text-indigo-700 mt-0.5">Senior Full Stack Software Engineer</p>
-                    <p id="cl-preview-contact" class="text-[8pt] text-slate-600 mt-1 block">alex.morgan@email.com • +1 (555) 382-9102 • San Francisco, CA</p>
+            <div id="cover-letter-preview" class="a4-page text-slate-900 text-[9pt] leading-relaxed hidden">
+                <div class="border-b border-slate-300 pb-3 mb-4">
+                    <h1 id="cl-preview-name" class="text-base font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
+                    <p id="cl-preview-title" class="text-[9pt] font-semibold text-indigo-700 mt-0.5">Senior Full Stack Software Engineer</p>
+                    <p id="cl-preview-contact" class="text-[7.5pt] text-slate-600 mt-1 block">alex.morgan@email.com • +1 (555) 382-9102 • San Francisco, CA</p>
                 </div>
-                <div class="mb-5 text-[9pt] text-slate-600 space-y-0.5">
+                <div class="mb-4 text-[8.5pt] text-slate-600 space-y-0.5">
                     <p id="cl-preview-date">October 28, 2026</p>
                     <p id="cl-preview-manager" class="font-semibold text-slate-800">Hiring Manager</p>
                     <p id="cl-preview-company" class="font-semibold text-slate-800">TechCorp Solutions</p>
                 </div>
-                <div id="cl-preview-body" class="text-slate-800 space-y-3 whitespace-pre-line text-[9.5pt] leading-normal"></div>
+                <div id="cl-preview-body" class="text-slate-700 space-y-3 whitespace-pre-line text-[9pt]"></div>
             </div>
 
         </div>
@@ -432,29 +434,8 @@ Alex Morgan</textarea>
 
     <script>
         let currentStep = 1;
-        const totalSteps = 8;
+        const totalSteps = 7;
         let activeDocType = 'resume';
-
-        function toggleDocType(type) {
-            activeDocType = type;
-            const resPrev = document.getElementById('resume-preview');
-            const clPrev = document.getElementById('cover-letter-preview');
-            const btnRes = document.getElementById('btn-toggle-resume');
-            const btnCover = document.getElementById('btn-toggle-cover');
-
-            if (type === 'cover') {
-                resPrev.classList.add('hidden');
-                clPrev.classList.remove('hidden');
-                btnRes.className = "bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs hover:bg-slate-800 transition cursor-pointer";
-                btnCover.className = "bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs transition cursor-pointer";
-                setStep(7);
-            } else {
-                clPrev.classList.add('hidden');
-                resPrev.classList.remove('hidden');
-                btnCover.className = "bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs hover:bg-slate-800 transition cursor-pointer";
-                btnRes.className = "bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs transition cursor-pointer";
-            }
-        }
 
         // Profession Presets Data for Quick Switching Demo
         const professions = {
@@ -560,6 +541,27 @@ Alex Morgan</textarea>
             }
         };
 
+        function toggleDocType(type) {
+            activeDocType = type;
+            const resPrev = document.getElementById('resume-preview');
+            const clPrev = document.getElementById('cover-letter-preview');
+            const btnRes = document.getElementById('btn-toggle-resume');
+            const btnCover = document.getElementById('btn-toggle-cover');
+
+            if (type === 'cover') {
+                resPrev.classList.add('hidden');
+                clPrev.classList.remove('hidden');
+                btnRes.className = "bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs cursor-pointer";
+                btnCover.className = "bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold shadow transition text-xs cursor-pointer";
+                setStep(7);
+            } else {
+                clPrev.classList.add('hidden');
+                resPrev.classList.remove('hidden');
+                btnCover.className = "bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs cursor-pointer";
+                btnRes.className = "bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold shadow transition text-xs cursor-pointer";
+            }
+        }
+
         function loadProfession(key) {
             const prof = professions[key];
             if (!prof) return;
@@ -645,10 +647,6 @@ Alex Morgan</textarea>
             if (nextBtn) {
                 nextBtn.innerText = currentStep === totalSteps ? "Finish" : "Next Step";
             }
-
-            if (currentStep === 7 && activeDocType === 'resume') {
-                toggleDocType('cover');
-            }
         }
 
         function changeStep(direction) {
@@ -694,4 +692,298 @@ Alex Morgan</textarea>
                     <input type="text" placeholder="Company" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-company">
                     <input type="text" placeholder="Role" oninput="updateResume()" class="p-1.5 text-xs border rounded exp-role">
                 </div>
-                <input type="text" placeholder="Dates" value="Jan 2022 — Present" oninput="updateResume()"
+                <input type="text" placeholder="Dates" value="Jan 2022 — Present" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded exp-dates">
+                <textarea placeholder="Accomplishments..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded exp-desc"></textarea>
+            `;
+            container.appendChild(div);
+            updateResume();
+        }
+
+        function addProject() {
+            const container = document.getElementById('project-container');
+            if (!container) return;
+            const div = document.createElement('div');
+            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 proj-item relative';
+            div.innerHTML = `
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
+                <input type="text" placeholder="Project Name" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-name">
+                <input type="text" placeholder="Technologies" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded proj-tech">
+                <textarea placeholder="Description..." oninput="updateResume()" rows="2" class="w-full p-1.5 text-xs border rounded proj-desc"></textarea>
+            `;
+            container.appendChild(div);
+            updateResume();
+        }
+
+        function addEducation() {
+            const container = document.getElementById('education-container');
+            if (!container) return;
+            const div = document.createElement('div');
+            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 edu-item relative';
+            div.innerHTML = `
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" placeholder="Degree" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-degree">
+                    <input type="text" placeholder="Institution" oninput="updateResume()" class="p-1.5 text-xs border rounded edu-uni">
+                </div>
+                <input type="text" placeholder="Year" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded edu-year">
+            `;
+            container.appendChild(div);
+            updateResume();
+        }
+
+        function addReference() {
+            const container = document.getElementById('reference-container');
+            if (!container) return;
+            const div = document.createElement('div');
+            div.className = 'p-3 bg-slate-50 border rounded-lg space-y-2 ref-item relative';
+            div.innerHTML = `
+                <button type="button" onclick="removeItem(this)" class="absolute top-2 right-2 text-red-500 text-xs font-bold cursor-pointer">✕</button>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" placeholder="Name" oninput="updateResume()" class="p-1.5 text-xs border rounded ref-name">
+                    <input type="text" placeholder="Title & Company" oninput="updateResume()" class="p-1.5 text-xs border rounded ref-title">
+                </div>
+                <input type="text" placeholder="Contact Info" oninput="updateResume()" class="w-full p-1.5 text-xs border rounded ref-contact">
+            `;
+            container.appendChild(div);
+            updateResume();
+        }
+
+        function safeSetText(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        function safeVal(id) {
+            const el = document.getElementById(id);
+            return el ? el.value.trim() : '';
+        }
+
+        function updateResume() {
+            try {
+                const template = safeVal('input-template') || 'classic';
+                const colorTheme = safeVal('input-color-theme') || 'indigo';
+
+                // Apply Dynamic Color Accent Classes
+                const hHeadings = document.querySelectorAll('#resume-preview h3');
+                const titleEl = document.getElementById('preview-title');
+                const clTitleEl = document.getElementById('cl-preview-title');
+
+                let textColor = 'text-indigo-700';
+                let borderColor = 'border-indigo-200';
+
+                if (colorTheme === 'emerald') {
+                    textColor = 'text-emerald-700';
+                    borderColor = 'border-emerald-200';
+                } else if (colorTheme === 'dark') {
+                    textColor = 'text-slate-900';
+                    borderColor = 'border-slate-800';
+                } else if (colorTheme === 'crimson') {
+                    textColor = 'text-rose-700';
+                    borderColor = 'border-rose-200';
+                } else if (colorTheme === 'slate') {
+                    textColor = 'text-slate-700';
+                    borderColor = 'border-slate-300';
+                }
+
+                if (titleEl) titleEl.className = `text-[9pt] font-semibold ${textColor} mt-0.5`;
+                if (clTitleEl) clTitleEl.className = `text-[9pt] font-semibold ${textColor} mt-0.5`;
+
+                safeSetText('preview-name', safeVal('input-name') || 'Alex Morgan');
+                safeSetText('preview-title', safeVal('input-title') || 'Senior Full Stack Software Engineer');
+                safeSetText('cl-preview-name', safeVal('input-name') || 'Alex Morgan');
+                safeSetText('cl-preview-title', safeVal('input-title') || 'Senior Full Stack Software Engineer');
+                
+                const contactParts = [
+                    safeVal('input-email'),
+                    safeVal('input-phone'),
+                    safeVal('input-location'),
+                    safeVal('input-links')
+                ].filter(Boolean);
+                safeSetText('preview-contact', contactParts.join(' • '));
+                safeSetText('cl-preview-contact', contactParts.join(' • '));
+
+                safeSetText('preview-summary', safeVal('input-summary'));
+                safeSetText('preview-certs', safeVal('input-certs'));
+                safeSetText('preview-skills', safeVal('input-skills'));
+
+                // Cover Letter Text
+                safeSetText('cl-preview-manager', safeVal('cl-manager') || 'Hiring Manager');
+                safeSetText('cl-preview-company', safeVal('cl-company') || 'TechCorp Solutions');
+                safeSetText('cl-preview-body', safeVal('cl-body'));
+
+                const headerWrap = document.getElementById('preview-header-wrap');
+                const previewRoot = document.getElementById('resume-preview');
+                const nameEl = document.getElementById('preview-name');
+                const contactEl = document.getElementById('preview-contact');
+
+                if (previewRoot && headerWrap) {
+                    if (template === 'executive') {
+                        previewRoot.style.fontFamily = 'Calibri, Arial, sans-serif';
+                        headerWrap.className = "w-full text-center border-b-2 border-slate-900 pb-3 mb-3 bg-slate-900 text-white p-4 rounded";
+                        if (nameEl) nameEl.className = "text-lg font-bold uppercase tracking-wider text-white";
+                        if (titleEl) titleEl.className = "text-[9.5pt] font-semibold text-amber-400 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-300 mt-1.5 w-full block";
+                        hHeadings.forEach(h => {
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-slate-900 border-b-2 border-slate-900 pb-1 mb-1.5";
+                        });
+                    } else if (template === 'emerald') {
+                        previewRoot.style.fontFamily = 'Trebuchet MS, sans-serif';
+                        headerWrap.className = "w-full text-center border-b-2 border-emerald-600 pb-3 mb-3 bg-emerald-50 p-3 rounded";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-emerald-900";
+                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-emerald-700 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-emerald-800 mt-1.5 w-full block";
+                        hHeadings.forEach(h => {
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-emerald-700 border-b border-emerald-300 pb-1 mb-1.5";
+                        });
+                    } else if (template === 'modern') {
+                        previewRoot.style.fontFamily = 'Arial, sans-serif';
+                        headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-3 mb-3 bg-indigo-50/50 p-3 rounded";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-slate-900";
+                        if (titleEl) titleEl.className = `text-[9pt] font-semibold ${textColor} mt-1`;
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1.5 w-full block";
+                        hHeadings.forEach(h => {
+                            h.className = `text-[8pt] font-bold uppercase tracking-widest ${textColor} border-b ${borderColor} pb-1 mb-1.5`;
+                        });
+                    } else if (template === 'minimal') {
+                        previewRoot.style.fontFamily = 'Georgia, serif';
+                        headerWrap.className = "w-full text-center border-b border-zinc-400 pb-3 mb-3";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-zinc-900";
+                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-zinc-700 mt-1";
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-zinc-600 mt-1.5 w-full block";
+                        hHeadings.forEach(h => {
+                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-zinc-800 border-b border-zinc-300 pb-1 mb-1.5";
+                        });
+                    } else {
+                        previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
+                        headerWrap.className = "w-full text-center border-b border-slate-300 pb-3 mb-3";
+                        if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-slate-900";
+                        if (titleEl) titleEl.className = `text-[9pt] font-semibold ${textColor} mt-1`;
+                        if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1.5 w-full block";
+                        hHeadings.forEach(h => {
+                            h.className = `text-[8pt] font-bold uppercase tracking-widest ${textColor} border-b ${borderColor} pb-1 mb-1.5`;
+                        });
+                    }
+                }
+
+                const expContainer = document.getElementById('preview-experience');
+                if (expContainer) {
+                    expContainer.innerHTML = '';
+                    document.querySelectorAll('.exp-item').forEach(item => {
+                        const company = item.querySelector('.exp-company')?.value || '';
+                        const role = item.querySelector('.exp-role')?.value || '';
+                        const dates = item.querySelector('.exp-dates')?.value || '';
+                        const desc = item.querySelector('.exp-desc')?.value || '';
+                        if (company || role || desc) {
+                            expContainer.innerHTML += `
+                                <div class="mb-2">
+                                    <div class="flex justify-between font-semibold text-slate-900">
+                                        <span>${role}${role && company ? ' — ' : ''}${company}</span>
+                                        <span>${dates}</span>
+                                    </div>
+                                    <p class="text-slate-700 mt-0.5">&bull; ${desc}</p>
+                                </div>`;
+                        }
+                    });
+                }
+
+                const projContainer = document.getElementById('preview-projects');
+                if (projContainer) {
+                    projContainer.innerHTML = '';
+                    document.querySelectorAll('.proj-item').forEach(item => {
+                        const name = item.querySelector('.proj-name')?.value || '';
+                        const tech = item.querySelector('.proj-tech')?.value || '';
+                        const desc = item.querySelector('.proj-desc')?.value || '';
+                        if (name || desc) {
+                            projContainer.innerHTML += `
+                                <div class="mb-2">
+                                    <div class="flex justify-between font-semibold text-slate-900">
+                                        <span>${name} ${tech ? `<span class="font-normal text-slate-600">(${tech})</span>` : ''}</span>
+                                    </div>
+                                    <p class="text-slate-700 mt-0.5">&bull; ${desc}</p>
+                                </div>`;
+                        }
+                    });
+                }
+
+                const eduContainer = document.getElementById('preview-education');
+                if (eduContainer) {
+                    eduContainer.innerHTML = '';
+                    document.querySelectorAll('.edu-item').forEach(item => {
+                        const degree = item.querySelector('.edu-degree')?.value || '';
+                        const uni = item.querySelector('.edu-uni')?.value || '';
+                        const year = item.querySelector('.edu-year')?.value || '';
+                        if (degree || uni) {
+                            eduContainer.innerHTML += `
+                                <div class="flex justify-between font-semibold text-slate-900 mb-1">
+                                    <span>${degree}${degree && uni ? ' — ' : ''}${uni}</span>
+                                    <span class="font-normal text-slate-600">${year}</span>
+                                </div>`;
+                        }
+                    });
+                }
+
+                const refContainer = document.getElementById('preview-references');
+                const refSection = document.getElementById('preview-references-section');
+                const refItems = document.querySelectorAll('.ref-item');
+                if (refContainer && refSection) {
+                    refContainer.innerHTML = '';
+                    if (refItems.length > 0) {
+                        refSection.classList.remove('hidden');
+                        refItems.forEach(item => {
+                            const name = item.querySelector('.ref-name')?.value || '';
+                            const title = item.querySelector('.ref-title')?.value || '';
+                            const contact = item.querySelector('.ref-contact')?.value || '';
+                            if (name || title) {
+                                refContainer.innerHTML += `
+                                    <div>
+                                        <p class="font-semibold text-slate-900">${name} ${title ? `(${title})` : ''}</p>
+                                        <p class="text-indigo-600">${contact}</p>
+                                    </div>`;
+                            }
+                        });
+                    } else {
+                        refSection.classList.add('hidden');
+                    }
+                }
+            } catch (err) {
+                console.error("Error updating resume preview:", err);
+            }
+        }
+
+        function shareResume() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My ATS Resume',
+                    text: 'Check out the professional resume I created using this free ATS Resume Builder!',
+                    url: window.location.href,
+                })
+                .then(() => console.log('Successfully shared'))
+                .catch((error) => console.log('Error sharing:', error));
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Resume link copied to clipboard!');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateResume();
+        });
+
+        function downloadPDF() {
+            const targetId = activeDocType === 'cover' ? 'cover-letter-preview' : 'resume-preview';
+            const element = document.getElementById(targetId);
+            const fileName = activeDocType === 'cover' ? 'Cover_Letter.pdf' : 'Professional_Resume.pdf';
+
+            const options = {
+                margin:       [10, 10, 10, 10],
+                filename:     fileName,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak:    { mode: ['css', 'legacy'] }
+            };
+            html2pdf().from(element).set(options).save();
+        }
+    </script>
+</body>
+</html>
