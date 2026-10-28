@@ -25,9 +25,8 @@
         .a4-page {
             width: 100%;
             max-width: 210mm;
-            height: auto; /* min-height এর পরিবর্তে height auto ব্যবহার করা হলো যাতে কন্টেন্ট অনুযায়ী পেজ সাইজ হয় */
-            min-height: 297mm;
-            padding: 12mm 15mm;
+            min-height: auto; /* ফিক্সড হাইড তুলে দেওয়া হলো যাতে কন্টেন্ট অনুযায়ী পেজ হয় */
+            padding: 10mm 12mm;
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
@@ -35,7 +34,7 @@
             letter-spacing: normal;
             word-spacing: normal;
             -webkit-font-smoothing: antialiased;
-            overflow: visible;
+            overflow: hidden; /* এক্সট্রা স্পেস ওভারফ্লো রোধ করতে */
             display: block;
             margin: 0 auto;
         }
@@ -970,7 +969,7 @@ Alex Morgan</textarea>
             updateResume();
         });
 
-        function downloadPDF() {
+function downloadPDF() {
             const targetId = activeDocType === 'cover' ? 'cover-letter-preview' : 'resume-preview';
             const element = document.getElementById(targetId);
             const fileName = activeDocType === 'cover' ? 'Cover_Letter.pdf' : 'Professional_Resume.pdf';
@@ -979,10 +978,12 @@ Alex Morgan</textarea>
                 margin:       [5, 5, 5, 5],
                 filename:     fileName,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true, windowWidth: 794 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
                 pagebreak:    { mode: ['css', 'legacy'] }
             };
+            
+            // সাময়িকভাবে পেজ প্রিভিউ ঠিক রেখে পিডিএফ জেনারেট করা
             html2pdf().from(element).set(options).save();
         }
     </script>
