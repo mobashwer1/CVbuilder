@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free ATS Resume Builder - Create Professional A4 Resumes</title>
+    <title>Free ATS Resume & Cover Letter Builder - Create Professional A4 PDFs</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Build an ATS-optimized professional resume online for free. Download clean, single or multi-page A4 PDF resumes instantly with zero registration or watermarks.">
-    <meta name="keywords" content="free ATS resume builder, A4 resume generator, professional CV maker, ATS compliant resume templates, free PDF resume">
+    <meta name="description" content="Build an ATS-optimized professional resume and cover letter online for free. Download clean, single or multi-page A4 PDF resumes instantly with zero registration or watermarks.">
+    <meta name="keywords" content="free ATS resume builder, cover letter generator, A4 resume maker, professional CV builder, ATS cover letter template">
     <meta name="robots" content="index, follow">
 
     <!-- OpenGraph / Social Previews -->
@@ -39,7 +39,7 @@
             margin: 0 auto;
         }
 
-        #resume-preview * {
+        #resume-preview *, #cover-letter-preview * {
             box-sizing: border-box;
             max-width: 100%;
             word-break: break-word;
@@ -47,10 +47,9 @@
 
         .resume-section {
             page-break-inside: avoid;
-            break-inside: avoid;
+            break-inside: avoid;    
         }
     </style>
-    
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
 
@@ -58,20 +57,22 @@
     <header class="bg-slate-900 text-white shadow-md py-6 px-6">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div>
-                <h1 class="text-2xl font-bold tracking-wide">Free ATS Resume Builder</h1>
-                <p class="text-xs text-slate-400 mt-1">Create professional A4 PDF resumes that expand seamlessly across pages.</p>
+                <h1 class="text-2xl font-bold tracking-wide">Free ATS Resume & Cover Letter Builder</h1>
+                <p class="text-xs text-slate-400 mt-1">Create professional A4 PDF resumes and cover letters that expand seamlessly across pages.</p>
             </div>
-<div class="flex items-center flex-wrap gap-2">
-            <button type="button" onclick="shareResume()" class="bg-slate-700 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs md:text-sm cursor-pointer">
-                Share CV
-            </button>
-            <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition text-xs md:text-sm cursor-pointer">
-                Download A4 PDF (100% Free)
-            </button>
-            <a href="https://mobashwer.gumroad.com/l/cdfjvs" target="_blank" class="bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-emerald-700 transition text-xs md:text-sm cursor-pointer">
-                Get Source Code ($3)
-            </a>
-        </div>
+            <div class="flex items-center flex-wrap gap-2">
+                <button type="button" onclick="toggleDocType('resume')" id="btn-toggle-resume" class="bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs transition cursor-pointer">Resume Mode</button>
+                <button type="button" onclick="toggleDocType('cover')" id="btn-toggle-cover" class="bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs hover:bg-slate-800 transition cursor-pointer">Cover Letter Mode</button>
+                <button type="button" onclick="shareResume()" class="bg-slate-700 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-slate-800 transition text-xs md:text-sm cursor-pointer">
+                    Share CV
+                </button>
+                <button type="button" onclick="downloadPDF()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 transition text-xs md:text-sm cursor-pointer">
+                    Download A4 PDF
+                </button>
+                <a href="https://mobashwer.gumroad.com/l/cdfjvs" target="_blank" class="bg-emerald-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-emerald-700 transition text-xs md:text-sm cursor-pointer">
+                    Get Source Code ($3)
+                </a>
+            </div>
         </div>
     </header>
 
@@ -96,30 +97,43 @@
                 
                 <!-- Navigation Tabs -->
                 <div id="tabs-container" class="flex border-b border-slate-200 pb-3 mb-4 justify-between text-xs font-semibold overflow-x-auto gap-2">
-                    <button type="button" onclick="setStep(1)" id="tab-1" class="step-tab text-indigo-600 border-b-2 border-indigo-600 pb-1 px-1 whitespace-nowrap cursor-pointer">1. Header</button>
+                    <button type="button" onclick="setStep(1)" id="tab-1" class="step-tab text-indigo-600 border-b-2 border-indigo-600 pb-1 px-1 whitespace-nowrap cursor-pointer">1. Header & Theme</button>
                     <button type="button" onclick="setStep(2)" id="tab-2" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">2. Summary</button>
                     <button type="button" onclick="setStep(3)" id="tab-3" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">3. Experience</button>
                     <button type="button" onclick="setStep(4)" id="tab-4" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">4. Projects</button>
                     <button type="button" onclick="setStep(5)" id="tab-5" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">5. Education</button>
                     <button type="button" onclick="setStep(6)" id="tab-6" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">6. Skills & Certs</button>
-                    <button type="button" onclick="setStep(7)" id="tab-7" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">7. References</button>
+                    <button type="button" onclick="setStep(7)" id="tab-7" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">7. Cover Letter</button>
+                    <button type="button" onclick="setStep(8)" id="tab-8" class="step-tab text-slate-400 pb-1 px-1 whitespace-nowrap cursor-pointer">8. References</button>
                 </div>
 
                 <!-- Form Content -->
                 <div class="space-y-4">
                     <!-- STEP 1 -->
                     <div id="step-1" class="wizard-step space-y-4">
-                        <h3 class="text-sm font-bold text-slate-900 uppercase">1. Personal Information & Template Style</h3>
+                        <h3 class="text-sm font-bold text-slate-900 uppercase">1. Personal Information & Theme</h3>
                         
-                        <div>
-                            <label class="block text-xs font-medium text-slate-600 mb-1">Resume Template Style</label>
-                            <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
-                                <option value="classic">Classic Professional (Clean & Structured)</option>
-                                <option value="modern">Modern Split (Indigo Accent Border)</option>
-                                <option value="minimal">Minimalist Clean (Serif Typography)</option>
-                                <option value="executive">Executive Dark (Bold Header Banner)</option>
-                                <option value="emerald">Creative Emerald (Green Accent & Modern Fonts)</option>
-                            </select>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Color Theme Accent</label>
+                                <select id="input-color-theme" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
+                                    <option value="indigo">Indigo Accent (Modern Blue)</option>
+                                    <option value="emerald">Emerald Green (Fresh & Clean)</option>
+                                    <option value="dark">Executive Dark Navy</option>
+                                    <option value="crimson">Crimson Red (Bold)</option>
+                                    <option value="slate">Slate Neutral (Minimal Monochromatic)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600 mb-1">Resume Template Style</label>
+                                <select id="input-template" onchange="updateResume()" class="w-full p-2 text-sm border rounded bg-white font-medium text-slate-700">
+                                    <option value="classic">Classic Professional (Clean & Structured)</option>
+                                    <option value="modern">Modern Split (Indigo Accent Border)</option>
+                                    <option value="minimal">Minimalist Clean (Serif Typography)</option>
+                                    <option value="executive">Executive Dark (Bold Header Banner)</option>
+                                    <option value="emerald">Creative Emerald (Green Accent & Modern Fonts)</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div>
@@ -226,10 +240,38 @@
                         </div>
                     </div>
 
-                    <!-- STEP 7 -->
+                    <!-- STEP 7: COVER LETTER GENERATOR -->
                     <div id="step-7" class="wizard-step space-y-4 hidden">
+                        <h3 class="text-sm font-bold text-slate-900 uppercase">7. ATS Cover Letter Generator</h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">Hiring Manager Name</label>
+                                <input type="text" id="cl-manager" value="Hiring Manager" oninput="updateResume()" class="mt-1 w-full p-2 text-xs border rounded">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-600">Target Company Name</label>
+                                <input type="text" id="cl-company" value="TechCorp Solutions" oninput="updateResume()" class="mt-1 w-full p-2 text-xs border rounded">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-600">Cover Letter Body</label>
+                            <textarea id="cl-body" rows="8" oninput="updateResume()" class="w-full p-2 text-xs border rounded leading-relaxed">Dear Hiring Manager,
+
+I am writing to express my strong interest in the Senior Full Stack Software Engineer position at TechCorp Solutions. With over 7 years of hands-on experience building scalable web applications and cloud architectures, I am confident in my ability to significantly contribute to your engineering team.
+
+In my previous roles, I successfully reduced application latency by 35% through microservices architecture and developed tools used by thousands of developers. My core skills in JavaScript, React, Node.js, and AWS align perfectly with your technical stack.
+
+Thank you for your time and consideration. I look forward to discussing how my experience and passion for scalable engineering can benefit TechCorp Solutions.
+
+Sincerely,
+Alex Morgan</textarea>
+                        </div>
+                    </div>
+
+                    <!-- STEP 8 -->
+                    <div id="step-8" class="wizard-step space-y-4 hidden">
                         <div class="flex justify-between items-center">
-                            <h3 class="text-sm font-bold text-slate-900 uppercase">7. Professional References</h3>
+                            <h3 class="text-sm font-bold text-slate-900 uppercase">8. Professional References</h3>
                             <button type="button" onclick="addReference()" class="text-xs bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-semibold cursor-pointer">+ Add Reference</button>
                         </div>
                         <div id="reference-container" class="space-y-4"></div>
@@ -252,6 +294,8 @@
 
         <!-- RIGHT: Live A4 Preview Pane -->
         <div class="w-full bg-slate-200 flex flex-col items-center justify-start overflow-x-auto p-4 rounded-xl">
+            
+            <!-- RESUME PREVIEW -->
             <div id="resume-preview" class="a4-page text-slate-900 text-[8.5pt] leading-snug">
                 <div>
                     <div id="preview-header-wrap" class="w-full text-center border-b border-slate-300 pb-3 mb-3">
@@ -308,6 +352,22 @@
                     </div>
                 </div>
             </div>
+
+            <!-- COVER LETTER PREVIEW (Hidden by default) -->
+            <div id="cover-letter-preview" class="a4-page text-slate-900 text-[9pt] leading-relaxed hidden">
+                <div class="border-b border-slate-300 pb-3 mb-4">
+                    <h1 id="cl-preview-name" class="text-base font-bold uppercase tracking-wide text-slate-900">Alex Morgan</h1>
+                    <p id="cl-preview-title" class="text-[9pt] font-semibold text-indigo-700 mt-0.5">Senior Full Stack Software Engineer</p>
+                    <p id="cl-preview-contact" class="text-[7.5pt] text-slate-600 mt-1 block">alex.morgan@email.com • +1 (555) 382-9102 • San Francisco, CA</p>
+                </div>
+                <div class="mb-4 text-[8.5pt] text-slate-600 space-y-0.5">
+                    <p id="cl-preview-date">October 28, 2026</p>
+                    <p id="cl-preview-manager" class="font-semibold text-slate-800">Hiring Manager</p>
+                    <p id="cl-preview-company" class="font-semibold text-slate-800">TechCorp Solutions</p>
+                </div>
+                <div id="cl-preview-body" class="text-slate-700 space-y-3 whitespace-pre-line text-[9pt]"></div>
+            </div>
+
         </div>
 
     </main>
@@ -372,7 +432,29 @@
 
     <script>
         let currentStep = 1;
-        const totalSteps = 7;
+        const totalSteps = 8;
+        let activeDocType = 'resume';
+
+        function toggleDocType(type) {
+            activeDocType = type;
+            const resPrev = document.getElementById('resume-preview');
+            const clPrev = document.getElementById('cover-letter-preview');
+            const btnRes = document.getElementById('btn-toggle-resume');
+            const btnCover = document.getElementById('btn-toggle-cover');
+
+            if (type === 'cover') {
+                resPrev.classList.add('hidden');
+                clPrev.classList.remove('hidden');
+                btnRes.className = "bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs hover:bg-slate-800 transition cursor-pointer";
+                btnCover.className = "bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs transition cursor-pointer";
+                setStep(7);
+            } else {
+                clPrev.classList.add('hidden');
+                resPrev.classList.remove('hidden');
+                btnCover.className = "bg-slate-700 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs hover:bg-slate-800 transition cursor-pointer";
+                btnRes.className = "bg-indigo-600 text-white px-3.5 py-2.5 rounded-lg font-semibold text-xs transition cursor-pointer";
+            }
+        }
 
         // Profession Presets Data for Quick Switching Demo
         const professions = {
@@ -563,13 +645,17 @@
             if (nextBtn) {
                 nextBtn.innerText = currentStep === totalSteps ? "Finish" : "Next Step";
             }
+
+            if (currentStep === 7 && activeDocType === 'resume') {
+                toggleDocType('cover');
+            }
         }
 
         function changeStep(direction) {
             currentStep += direction;
             if (currentStep > totalSteps) {
                 currentStep = totalSteps;
-                alert("Your resume is ready for download!");
+                alert("Your document is ready for download!");
             } else if (currentStep < 1) {
                 currentStep = 1;
             }
@@ -677,9 +763,12 @@
         function updateResume() {
             try {
                 const template = safeVal('input-template') || 'classic';
+                const colorTheme = safeVal('input-color-theme') || 'indigo';
                 
                 safeSetText('preview-name', safeVal('input-name') || 'Alex Morgan');
                 safeSetText('preview-title', safeVal('input-title') || 'Senior Full Stack Software Engineer');
+                safeSetText('cl-preview-name', safeVal('input-name') || 'Alex Morgan');
+                safeSetText('cl-preview-title', safeVal('input-title') || 'Senior Full Stack Software Engineer');
                 
                 const contactParts = [
                     safeVal('input-email'),
@@ -688,10 +777,16 @@
                     safeVal('input-links')
                 ].filter(Boolean);
                 safeSetText('preview-contact', contactParts.join(' • '));
+                safeSetText('cl-preview-contact', contactParts.join(' • '));
 
                 safeSetText('preview-summary', safeVal('input-summary'));
                 safeSetText('preview-certs', safeVal('input-certs'));
                 safeSetText('preview-skills', safeVal('input-skills'));
+
+                // Cover Letter Text Update
+                safeSetText('cl-preview-manager', safeVal('cl-manager') || 'Hiring Manager');
+                safeSetText('cl-preview-company', safeVal('cl-company') || 'Target Company');
+                safeSetText('cl-preview-body', safeVal('cl-body'));
 
                 const headerWrap = document.getElementById('preview-header-wrap');
                 const previewRoot = document.getElementById('resume-preview');
@@ -699,6 +794,26 @@
                 const nameEl = document.getElementById('preview-name');
                 const titleEl = document.getElementById('preview-title');
                 const contactEl = document.getElementById('preview-contact');
+                const clTitleEl = document.getElementById('cl-preview-title');
+
+                // Color Themes Mapping
+                let themeAccentClass = 'text-indigo-700';
+                let themeBorderClass = 'border-indigo-200';
+                if (colorTheme === 'emerald') {
+                    themeAccentClass = 'text-emerald-700';
+                    themeBorderClass = 'border-emerald-200';
+                } else if (colorTheme === 'dark') {
+                    themeAccentClass = 'text-slate-900';
+                    themeBorderClass = 'border-slate-800';
+                } else if (colorTheme === 'crimson') {
+                    themeAccentClass = 'text-rose-700';
+                    themeBorderClass = 'border-rose-200';
+                } else if (colorTheme === 'slate') {
+                    themeAccentClass = 'text-slate-700';
+                    themeBorderClass = 'border-slate-300';
+                }
+
+                if (clTitleEl) clTitleEl.className = `text-[9pt] font-semibold ${themeAccentClass} mt-0.5`;
 
                 if (previewRoot && headerWrap) {
                     if (template === 'executive') {
@@ -723,10 +838,10 @@
                         previewRoot.style.fontFamily = 'Arial, sans-serif';
                         headerWrap.className = "w-full text-center border-b-2 border-indigo-600 pb-3 mb-3 bg-indigo-50/50 p-3 rounded";
                         if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-slate-900";
-                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-indigo-700 mt-1";
+                        if (titleEl) titleEl.className = `text-[9pt] font-semibold ${themeAccentClass} mt-1`;
                         if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1.5 w-full block";
                         hHeadings.forEach(h => {
-                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-indigo-700 border-b border-indigo-200 pb-1 mb-1.5";
+                            h.className = `text-[8pt] font-bold uppercase tracking-widest ${themeAccentClass} border-b ${themeBorderClass} pb-1 mb-1.5`;
                         });
                     } else if (template === 'minimal') {
                         previewRoot.style.fontFamily = 'Georgia, serif';
@@ -741,10 +856,10 @@
                         previewRoot.style.fontFamily = 'Arial, Helvetica, sans-serif';
                         headerWrap.className = "w-full text-center border-b border-slate-300 pb-3 mb-3";
                         if (nameEl) nameEl.className = "text-base font-bold uppercase tracking-wide text-slate-900";
-                        if (titleEl) titleEl.className = "text-[9pt] font-semibold text-indigo-700 mt-1";
+                        if (titleEl) titleEl.className = `text-[9pt] font-semibold ${themeAccentClass} mt-1`;
                         if (contactEl) contactEl.className = "text-[7.5pt] text-slate-600 mt-1.5 w-full block";
                         hHeadings.forEach(h => {
-                            h.className = "text-[8pt] font-bold uppercase tracking-widest text-slate-700 border-b border-slate-200 pb-1 mb-1.5";
+                            h.className = `text-[8pt] font-bold uppercase tracking-widest ${themeAccentClass} border-b ${themeBorderClass} pb-1 mb-1.5`;
                         });
                     }
                 }
@@ -854,10 +969,13 @@
         });
 
         function downloadPDF() {
-            const element = document.getElementById('resume-preview');
+            const targetId = activeDocType === 'cover' ? 'cover-letter-preview' : 'resume-preview';
+            const element = document.getElementById(targetId);
+            const fileName = activeDocType === 'cover' ? 'Cover_Letter.pdf' : 'Professional_Resume.pdf';
+
             const options = {
                 margin:       [10, 10, 10, 10],
-                filename:     'Professional_Resume.pdf',
+                filename:     fileName,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
